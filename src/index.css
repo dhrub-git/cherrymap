@@ -2,10 +2,58 @@
 @import "tw-animate-css";
 
 @theme {
-  --color-paper: #fffaf1; --color-ink: #173b2d; --color-eucalypt: #2f6a50; --color-blossom: #d95680; --color-peach: #f6d8bf; --color-harbour: #c4e1e7;
-  --font-display: Georgia, "Times New Roman", serif; --font-sans: "Avenir Next", Avenir, ui-sans-serif, system-ui, sans-serif;
+  --color-paper: #fffaf1;
+  --color-ink: #173b2d;
+  --color-eucalypt: #2f6a50;
+  --color-blossom: #d95680;
+  --color-berry: #a92f59;
+  --color-peach: #f6d8bf;
+  --color-pollen: #efbd68;
+  --color-harbour: #c4e1e7;
+  --font-display: georgia, "Times New Roman", serif;
+  --font-sans: "Avenir Next", avenir, ui-sans-serif, system-ui, sans-serif;
 }
 
-@layer base { * { @apply border-stone-200; } html { @apply bg-paper; } body { @apply m-0 min-w-80 bg-paper font-sans antialiased; } button, input { font: inherit; } button { cursor: pointer; } button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid #2f6a50; outline-offset: 3px; } }
-.map-marker { width: 28px; height: 28px; border: 3px solid #fffaf1; border-radius: 50% 50% 50% 4px; box-shadow: 0 5px 14px rgb(23 59 45 / .3); transform: rotate(-45deg); transition: transform .18s ease; }.map-marker:hover { transform: rotate(-45deg) scale(1.18); }.map-marker::after { content:""; display:block; width:7px; height:7px; margin:7px; border-radius:999px; background:#fffaf1; }
-@media (prefers-reduced-motion: reduce) { *, ::before, ::after { scroll-behavior:auto !important; transition-duration:.01ms !important; animation-duration:.01ms !important; } }
+@layer base {
+  * { @apply border-stone-200; }
+  html { @apply bg-paper; }
+  body { @apply m-0 min-w-80 overflow-hidden bg-paper font-sans antialiased; }
+  button, input, select { font: inherit; }
+  button { cursor: pointer; }
+  button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible { outline: 2px solid #2f6a50; outline-offset: 3px; }
+}
+
+.header-action {
+  @apply min-h-10 items-center justify-center gap-2 rounded-full border border-white/80 bg-paper/92 px-3 text-xs font-bold text-ink shadow-sm backdrop-blur transition hover:bg-white;
+}
+
+.view-switch {
+  @apply inline-flex min-h-10 items-center gap-2 rounded-full px-4 text-xs font-bold text-slate-600 transition;
+}
+.view-switch.active { @apply bg-ink text-white shadow-sm; }
+
+.field-tag {
+  @apply flex min-h-14 flex-col justify-center rounded-xl border border-white/12 bg-white/7 px-3 capitalize text-white/80;
+}
+.field-tag strong { @apply mb-1 text-[10px] uppercase tracking-wider text-white/45; }
+
+.info-action {
+  @apply inline-flex min-h-11 items-center gap-2 rounded-full bg-ink px-4 text-sm font-bold text-white hover:bg-eucalypt;
+}
+.info-action.secondary { @apply border border-stone-300 bg-white text-ink hover:bg-peach/50; }
+dialog::backdrop { background: rgb(23 59 45 / .35); backdrop-filter: blur(3px); }
+
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+
+.maplibregl-map { font-family: inherit; }
+.maplibregl-ctrl-attrib { font-size: 10px; }
+.maplibregl-ctrl-bottom-right { bottom: 4.1rem; }
+
+@media (min-width: 768px) {
+  .maplibregl-ctrl-bottom-right { bottom: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
+}

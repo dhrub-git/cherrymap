@@ -6,5 +6,6 @@ import { defineConfig } from "vitest/config";
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   resolve: { alias: { "@": path.resolve(__dirname, "./src") } },
+  optimizeDeps: { exclude: ["maplibre-gl"] },
   test: { environment: "jsdom", setupFiles: ["./src/test/setup.ts"] },
 });
