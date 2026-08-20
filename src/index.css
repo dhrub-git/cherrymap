@@ -1,0 +1,11 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@theme {
+  --color-paper: #fffaf1; --color-ink: #173b2d; --color-eucalypt: #2f6a50; --color-blossom: #d95680; --color-peach: #f6d8bf; --color-harbour: #c4e1e7;
+  --font-display: Georgia, "Times New Roman", serif; --font-sans: "Avenir Next", Avenir, ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base { * { @apply border-stone-200; } html { @apply bg-paper; } body { @apply m-0 min-w-80 bg-paper font-sans antialiased; } button, input { font: inherit; } button { cursor: pointer; } button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid #2f6a50; outline-offset: 3px; } }
+.map-marker { width: 28px; height: 28px; border: 3px solid #fffaf1; border-radius: 50% 50% 50% 4px; box-shadow: 0 5px 14px rgb(23 59 45 / .3); transform: rotate(-45deg); transition: transform .18s ease; }.map-marker:hover { transform: rotate(-45deg) scale(1.18); }.map-marker::after { content:""; display:block; width:7px; height:7px; margin:7px; border-radius:999px; background:#fffaf1; }
+@media (prefers-reduced-motion: reduce) { *, ::before, ::after { scroll-behavior:auto !important; transition-duration:.01ms !important; animation-duration:.01ms !important; } }
