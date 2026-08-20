@@ -1,6 +1,7 @@
 node_modules/
 dist/
 public/data/locations.geojson
+public/data/locations.csv
 data/candidates/*
 !data/candidates/.gitkeep
 *.tsbuildinfo
