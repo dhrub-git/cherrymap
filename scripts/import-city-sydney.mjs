@@ -68,15 +68,15 @@ export async function verifySourceMetadata(fetchImpl = fetch) {
   const [layer, source] = await Promise.all([layerResponse.json(), sourceResponse.json()]);
   const fields = new Set(Array.isArray(layer.fields) ? layer.fields.map((field) => field.name) : []);
   if (layer.name !== "Trees" || REQUIRED_FIELDS.some((field) => !fields.has(field))) throw new Error("City of Sydney source schema changed; candidate import stopped.");
-  if (!JSON.stringify(source).toLowerCase().includes("cc by 4.0")) throw new Error("City of Sydney source licence could not be verified; candidate import stopped.");
+  if (source?.properties?.licenseInfo !== "https://creativecommons.org/licenses/by/4.0/") throw new Error("City of Sydney source licence could not be verified; candidate import stopped.");
 }
 
 export async function runImport() {
   const candidates = await fetchCitySydneyCandidates();
-  const date = new Date().toISOString().slice(0, 10);
+  const runId = new Date().toISOString().replaceAll(":", "-").replace(".", "-");
   await mkdir("data/candidates", { recursive: true });
-  await writeFile(`data/candidates/city-sydney-${date}.geojson`, `${JSON.stringify({ type: "FeatureCollection", features: candidates }, null, 2)}\n`);
-  await writeFile(`data/candidates/city-sydney-${date}.report.json`, `${JSON.stringify({ provider: "City of Sydney", dataset: "Trees", importedAt: new Date().toISOString(), candidates: candidates.length, reviewRequired: true }, null, 2)}\n`);
+  await writeFile(`data/candidates/city-sydney-${runId}.geojson`, `${JSON.stringify({ type: "FeatureCollection", features: candidates }, null, 2)}\n`);
+  await writeFile(`data/candidates/city-sydney-${runId}.report.json`, `${JSON.stringify({ provider: "City of Sydney", dataset: "Trees", importedAt: new Date().toISOString(), candidates: candidates.length, reviewRequired: true }, null, 2)}\n`);
   console.log(`Wrote ${candidates.length} City of Sydney candidates. No public data was changed.`);
 }
 
