@@ -35,6 +35,10 @@ describe("filterLocations", () => {
     expect(filterLocations(locations, { ...allFilters, query: "serrulata" })).toEqual(locations);
   });
 
+  it("searches optional street addresses", () => {
+    expect(filterLocations([{ ...locations[0], streetAddress: "99 Chiswick Road" }], { ...allFilters, query: "chiswick" })).toHaveLength(1);
+  });
+
   it("applies all structured filters", () => {
     expect(filterLocations(locations, { ...allFilters, locationType: "tree" })).toEqual([]);
     expect(filterLocations(locations, { ...allFilters, year: "2026" })).toEqual(locations);
@@ -50,11 +54,13 @@ describe("parseLocations", () => {
         id: "city:1",
         name: "Park tree",
         suburb: "Sydney",
+        streetAddress: "99 Chiswick Road",
         group: "Flowering plum",
         locationType: "tree",
         access: "Public access",
         lastChecked: "2026-08-20",
         source: "Council inventory",
+        visitorInfoUrl: "https://example.test/visit",
         locationConfidence: "Official",
         evidenceSummary: "Official record.",
         provenance: { provider: "City of Sydney", sourceUrl: "https://example.test", licence: "CC BY 4.0" },
@@ -63,9 +69,11 @@ describe("parseLocations", () => {
 
     expect(location).toMatchObject({
       councilArea: "City of Sydney",
+      streetAddress: "99 Chiswick Road",
       locationType: "tree",
       locationConfidence: "Official",
       evidenceSummary: "Official record.",
+      visitorInfoUrl: "https://example.test/visit",
       provenance: { sourceUrl: "https://example.test", licence: "CC BY 4.0" },
     });
   });

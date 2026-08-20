@@ -14,6 +14,7 @@ export type LocationProvenance = {
   sourceRecordId?: string;
   sourceUrl: string;
   licence?: string;
+  reuseBasis?: string;
   importedAt?: string;
   reviewedAt?: string;
 };
@@ -22,6 +23,7 @@ export type Location = {
   id: string;
   name: string;
   suburb: string;
+  streetAddress?: string;
   councilArea: string;
   group: BlossomGroup;
   locationType: LocationType;
@@ -34,6 +36,7 @@ export type Location = {
   taxonConfidence?: string;
   evidenceSummary: string;
   visitorNotes?: string;
+  visitorInfoUrl?: string;
   photoUrl?: string;
   photoCredit?: string;
   provenance: LocationProvenance;

@@ -14,15 +14,20 @@ describe("escapeCsv", () => {
       properties: {
         id: "city:1",
         name: "Park tree",
+        streetAddress: "99 Chiswick Road",
+        visitorInfoUrl: "https://example.test/visit",
         councilArea: "City of Sydney",
         locationType: "tree",
         locationConfidence: "Official",
         evidenceSummary: "Official record",
-        provenance: { sourceUrl: "https://example.test", licence: "CC BY 4.0" },
+        provenance: { sourceUrl: "https://example.test", licence: "CC BY 4.0", reuseBasis: "Curated facts" },
       },
     });
 
     expect(row).toContain('"tree"');
+    expect(row).toContain('"99 Chiswick Road"');
+    expect(row).toContain('"https://example.test/visit"');
+    expect(row).toContain('"Curated facts"');
     expect(row).toContain('"Official record"');
     expect(row).toContain('"https://example.test"');
   });

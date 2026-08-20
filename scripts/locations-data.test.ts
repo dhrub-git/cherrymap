@@ -24,10 +24,11 @@ describe("reviewed public dataset", () => {
         provenance: {
           provider: expect.any(String),
           sourceUrl: expect.stringMatching(/^https:\/\//),
-          licence: expect.any(String),
           reviewedAt: expect.any(String),
         },
       });
+      const provenance = feature.properties.provenance as Record<string, unknown>;
+      expect([provenance.licence, provenance.reuseBasis].some((value) => typeof value === "string" && value.trim().length > 0)).toBe(true);
       expect(JSON.stringify(feature.properties).toLowerCase()).not.toContain("private residential");
     }
   });
