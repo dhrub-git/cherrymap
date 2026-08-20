@@ -68,7 +68,8 @@ export async function verifySourceMetadata(fetchImpl = fetch) {
   const [layer, source] = await Promise.all([layerResponse.json(), sourceResponse.json()]);
   const fields = new Set(Array.isArray(layer.fields) ? layer.fields.map((field) => field.name) : []);
   if (layer.name !== "Trees" || REQUIRED_FIELDS.some((field) => !fields.has(field))) throw new Error("City of Sydney source schema changed; candidate import stopped.");
-  if (source?.properties?.licenseInfo !== "https://creativecommons.org/licenses/by/4.0/") throw new Error("City of Sydney source licence could not be verified; candidate import stopped.");
+  const licenceInfo = source?.properties?.licenseInfo;
+  if (typeof licenceInfo !== "string" || !licenceInfo.includes("https://creativecommons.org/licenses/by/4.0/")) throw new Error("City of Sydney source licence could not be verified; candidate import stopped.");
 }
 
 export async function runImport() {
