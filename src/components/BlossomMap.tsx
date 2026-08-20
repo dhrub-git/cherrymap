@@ -1,10 +1,9 @@
 import { useEffect, useRef } from "react";
 import * as maplibregl from "maplibre-gl";
+import { blossomColor } from "@/lib/blossom-groups";
 import type { Location } from "@/types/location";
 
 type Props = { locations: Location[]; selectedId: string | null; onSelect: (id: string) => void };
-
-const colorByGroup: Record<Location["group"], string> = { "Flowering cherry": "#d95680", "Flowering plum": "#db914f", "Mixed ornamental Prunus": "#6d568b", "Unknown flowering Prunus": "#71816d" };
 
 export function BlossomMap({ locations, selectedId, onSelect }: Props) {
   const container = useRef<HTMLDivElement>(null);
@@ -23,7 +22,7 @@ export function BlossomMap({ locations, selectedId, onSelect }: Props) {
     markers.current.forEach((marker) => marker.remove());
     markers.current = locations.map((location) => {
       const element = document.createElement("button");
-      element.type = "button"; element.ariaLabel = `Open ${location.name}`; element.className = "map-marker"; element.style.background = colorByGroup[location.group];
+      element.type = "button"; element.ariaLabel = `Open ${location.name}`; element.className = "map-marker"; element.style.background = blossomColor[location.group];
       element.onclick = () => onSelect(location.id);
       return new maplibregl.Marker({ element, anchor: "bottom" }).setLngLat(location.coordinates).addTo(map.current!);
     });

@@ -1,4 +1,6 @@
-export type BlossomGroup = "Flowering cherry" | "Flowering plum" | "Mixed ornamental Prunus" | "Unknown flowering Prunus";
+import type { BlossomGroup } from "@/lib/blossom-groups";
+
+export type { BlossomGroup } from "@/lib/blossom-groups";
 
 export type Location = {
   id: string;

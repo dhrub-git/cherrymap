@@ -2,10 +2,11 @@ import { Compass, MapPin, Search, SlidersHorizontal, X } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { BlossomMap } from "@/components/BlossomMap";
 import { Button } from "@/components/ui/button";
+import { blossomGroups } from "@/lib/blossom-groups";
 import { filterLocations, loadLocations } from "@/lib/locations";
 import type { Location } from "@/types/location";
 
-const groups: Array<"All blossoms" | Location["group"]> = ["All blossoms", "Flowering cherry", "Flowering plum", "Mixed ornamental Prunus", "Unknown flowering Prunus"];
+const groups: Array<"All blossoms" | Location["group"]> = ["All blossoms", ...blossomGroups.map((group) => group.label)];
 
 function App() {
   const [locations, setLocations] = useState<Location[]>([]);
