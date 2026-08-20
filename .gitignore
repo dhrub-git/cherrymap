@@ -1,5 +1,8 @@
 node_modules/
 dist/
+public/data/locations.geojson
+data/candidates/*
+!data/candidates/.gitkeep
 *.tsbuildinfo
 .env
 .env.*
