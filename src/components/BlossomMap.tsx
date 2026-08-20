@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import * as maplibregl from "maplibre-gl";
+import maplibreWorkerUrl from "maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url";
 import type { Feature, FeatureCollection, Point } from "geojson";
 import { blossomGroups } from "@/lib/blossom-groups";
 import { locationTypes } from "@/lib/location-types";
@@ -21,6 +22,8 @@ type MapProperties = {
 const POINT_SOURCE = "blossom-points";
 const CLUSTER_LAYER = "blossom-clusters";
 const LOCATION_LAYER = "blossom-locations";
+
+maplibregl.setWorkerUrl(maplibreWorkerUrl);
 
 const blossomColorExpression = [
   "match",
