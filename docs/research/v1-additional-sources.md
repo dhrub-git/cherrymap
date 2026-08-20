@@ -1,7 +1,7 @@
 # CherryMap V1 additional source audit
 
-**Reviewed:** 21 August 2026  
-**Scope:** Official Greater Sydney public-tree inventories beyond the approved City of Sydney Trees dataset. City of Parramatta remains excluded because no explicit reuse licence was found.
+**Reviewed at:** `2026-08-21T09:33:56+10:00` (Australia/Sydney)
+**Scope:** Official Greater Sydney public-tree inventories beyond the approved City of Sydney Trees dataset. City of Parramatta was not re-reviewed here; its service, blank licence metadata and Council reuse restrictions are documented in the [prior source audit](./v1-source-imports.md#city-of-parramatta--technically-viable-publication-gated).
 
 ## Decision
 
@@ -50,6 +50,18 @@ Ku-ring-gai Council links its [public tree dashboard](https://trees.krg.nsw.gov.
 `https://trees.krg.nsw.gov.au/storage/data/kuringai/kuringai_trees.geojson`
 
 The file contained 61,755 features when checked. Its fields include geometry, an asset identifier, genus (`g`) and species (`sp`). A case-insensitive query across taxonomy values found 64 Prunus/cherry/plum/peach candidates; the matched records were represented as genus `Prunus` with species values.
+
+**Reproducibility snapshot:** The raw HTTP `Date` header was `Thu, 20 Aug 2026 23:33:56 GMT`, which converts to `2026-08-21T09:33:56+10:00` in Australia/Sydney. The 22,869,229-byte response had raw header `Last-Modified: Fri, 24 Jul 2026 06:36:32 GMT`, ETag `"6a6307f0-15cf4ed"`, and SHA-256 `ad4b1601ad5cf622c67697bbff2906f209d89abf723ac7a3031f6d4be095f9b7` over the downloaded response bytes. Total count was `.features | length`. The broad candidate expression was `[.features[] | select(any(.properties[]; type == "string" and test("prunus|cherry|plum|peach"; "i")))]`; all 64 matches came from genus field `properties.g`, and the normalized filter `ascii_downcase(properties.g) == "prunus"` also returned 64. All matched `asset_id` values and coordinate arrays were present and unique, so deduplication by stable asset ID removed zero records. The taxonomy breakdown was 62 `Prunus spp.`, one `Prunus cerasifera`, and one `Prunus serrulata`.
+
+The snapshot checks were run against the unmodified downloaded file:
+
+```bash
+shasum -a 256 /tmp/kuringai_trees.geojson
+jq '.features | length' /tmp/kuringai_trees.geojson
+jq '[.features[] | select((.properties.g // "") | ascii_downcase == "prunus") | .properties.asset_id] | {rows:length, present:(map(select(. != null and . != ""))|length), unique:(unique|length)}' /tmp/kuringai_trees.geojson
+jq '[.features[] | select((.properties.g // "") | ascii_downcase == "prunus") | .geometry.coordinates] | {rows:length, present:(map(select(type == "array" and length >= 2))|length), unique:(unique|length)}' /tmp/kuringai_trees.geojson
+jq '[.features[] | select((.properties.g // "") | ascii_downcase == "prunus")] | {rows:length, uniqueByAsset:(unique_by(.properties.asset_id)|length)}' /tmp/kuringai_trees.geojson
+```
 
 This is technically suitable source data, but not legally reusable under the currently published terms. Council's [Copyright page](https://www.krg.nsw.gov.au/Council/Information-pages/Copyright) limits material to personal use and says it must not be copied, reproduced or republished without express written permission. CherryMap must not ingest or publish these records unless Council grants permission. Required attribution should be agreed with Council rather than inferred.
 
