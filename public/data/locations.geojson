@@ -1,0 +1,9 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    { "type": "Feature", "geometry": { "type": "Point", "coordinates": [151.2093, -33.8688] }, "properties": { "id": "demo-harbour", "name": "Harbour blossom walk", "suburb": "Sydney", "group": "Flowering cherry", "access": "Public access", "lastChecked": "2026-08-20", "source": "Development fixture — not for publication" } },
+    { "type": "Feature", "geometry": { "type": "Point", "coordinates": [151.0011, -33.815] }, "properties": { "id": "demo-park", "name": "Riverside ornamental row", "suburb": "Parramatta", "group": "Mixed ornamental Prunus", "access": "Public access", "lastChecked": "2026-08-20", "source": "Development fixture — not for publication" } },
+    { "type": "Feature", "geometry": { "type": "Point", "coordinates": [151.065, -33.848] }, "properties": { "id": "demo-garden", "name": "Garden collection", "suburb": "Lidcombe", "group": "Flowering plum", "access": "Ticketed venue", "lastChecked": "2026-08-20", "source": "Development fixture — not for publication" } },
+    { "type": "Feature", "geometry": { "type": "Point", "coordinates": [151.2153, -33.898] }, "properties": { "id": "demo-east", "name": "Eastern park cluster", "suburb": "Moore Park", "group": "Unknown flowering Prunus", "access": "Public access", "lastChecked": "2026-08-20", "source": "Development fixture — not for publication" } }
+  ]
+}
