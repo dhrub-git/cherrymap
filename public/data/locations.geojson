@@ -1,4 +1,740 @@
 {
   "type": "FeatureCollection",
-  "features": []
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          151.212281433748,
+          -33.8936156397157
+        ]
+      },
+      "properties": {
+        "id": "city-of-sydney:TS04842",
+        "name": "Prunus sp. — City of Sydney",
+        "suburb": "City of Sydney",
+        "group": "Flowering plum",
+        "access": "Public access",
+        "lastChecked": "2026-08-20",
+        "source": "Tree data: City of Sydney, CC BY 4.0",
+        "locationType": "tree",
+        "scientificName": "Prunus sp.",
+        "commonName": "Plum",
+        "locationConfidence": "Official",
+        "taxonConfidence": "Genus confirmed",
+        "evidenceSummary": "Official City of Sydney public tree asset; curator-reviewed for public access and conservatively classified from the source taxonomy.",
+        "provenance": {
+          "provider": "City of Sydney",
+          "dataset": "Trees",
+          "sourceRecordId": "TS04842",
+          "serviceRowId": "3461",
+          "sourceUrl": "https://data.cityofsydney.nsw.gov.au/api/search/v1/collections/dataset/items/15c4713a688a48fcb604fc343118af05_0",
+          "licence": "CC BY 4.0",
+          "importedAt": "2026-08-20T21:18:33.633Z",
+          "reviewedAt": "2026-08-21T00:00:00.000Z"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          151.205781240893,
+          -33.9164549219008
+        ]
+      },
+      "properties": {
+        "id": "city-of-sydney:TS12800",
+        "name": "Prunus sp. — City of Sydney",
+        "suburb": "City of Sydney",
+        "group": "Flowering plum",
+        "access": "Public access",
+        "lastChecked": "2026-08-20",
+        "source": "Tree data: City of Sydney, CC BY 4.0",
+        "locationType": "tree",
+        "scientificName": "Prunus sp.",
+        "commonName": "Plum",
+        "locationConfidence": "Official",
+        "taxonConfidence": "Genus confirmed",
+        "evidenceSummary": "Official City of Sydney public tree asset; curator-reviewed for public access and conservatively classified from the source taxonomy.",
+        "provenance": {
+          "provider": "City of Sydney",
+          "dataset": "Trees",
+          "sourceRecordId": "TS12800",
+          "serviceRowId": "4008",
+          "sourceUrl": "https://data.cityofsydney.nsw.gov.au/api/search/v1/collections/dataset/items/15c4713a688a48fcb604fc343118af05_0",
+          "licence": "CC BY 4.0",
+          "importedAt": "2026-08-20T21:18:33.635Z",
+          "reviewedAt": "2026-08-21T00:00:00.000Z"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          151.206728144904,
+          -33.9173600831199
+        ]
+      },
+      "properties": {
+        "id": "city-of-sydney:TS13888",
+        "name": "Prunus sp. — City of Sydney",
+        "suburb": "City of Sydney",
+        "group": "Flowering plum",
+        "access": "Public access",
+        "lastChecked": "2026-08-20",
+        "source": "Tree data: City of Sydney, CC BY 4.0",
+        "locationType": "tree",
+        "scientificName": "Prunus sp.",
+        "commonName": "Plum",
+        "locationConfidence": "Official",
+        "taxonConfidence": "Genus confirmed",
+        "evidenceSummary": "Official City of Sydney public tree asset; curator-reviewed for public access and conservatively classified from the source taxonomy.",
+        "provenance": {
+          "provider": "City of Sydney",
+          "dataset": "Trees",
+          "sourceRecordId": "TS13888",
+          "serviceRowId": "4116",
+          "sourceUrl": "https://data.cityofsydney.nsw.gov.au/api/search/v1/collections/dataset/items/15c4713a688a48fcb604fc343118af05_0",
+          "licence": "CC BY 4.0",
+          "importedAt": "2026-08-20T21:18:33.635Z",
+          "reviewedAt": "2026-08-21T00:00:00.000Z"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          151.176769376747,
+          -33.8819025591927
+        ]
+      },
+      "properties": {
+        "id": "city-of-sydney:TS28229",
+        "name": "Prunus x blireana — City of Sydney",
+        "suburb": "City of Sydney",
+        "group": "Flowering plum",
+        "access": "Public access",
+        "lastChecked": "2026-08-20",
+        "source": "Tree data: City of Sydney, CC BY 4.0",
+        "locationType": "tree",
+        "scientificName": "Prunus x blireana",
+        "commonName": "Purple-leafed Plum",
+        "locationConfidence": "Official",
+        "taxonConfidence": "Species confirmed",
+        "evidenceSummary": "Official City of Sydney public tree asset; curator-reviewed for public access and conservatively classified from the source taxonomy.",
+        "provenance": {
+          "provider": "City of Sydney",
+          "dataset": "Trees",
+          "sourceRecordId": "TS28229",
+          "serviceRowId": "8231",
+          "sourceUrl": "https://data.cityofsydney.nsw.gov.au/api/search/v1/collections/dataset/items/15c4713a688a48fcb604fc343118af05_0",
+          "licence": "CC BY 4.0",
+          "importedAt": "2026-08-20T21:18:33.635Z",
+          "reviewedAt": "2026-08-21T00:00:00.000Z"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          151.176634562443,
+          -33.8808809717275
+        ]
+      },
+      "properties": {
+        "id": "city-of-sydney:TS28232",
+        "name": "Prunus x blireana — City of Sydney",
+        "suburb": "City of Sydney",
+        "group": "Flowering plum",
+        "access": "Public access",
+        "lastChecked": "2026-08-20",
+        "source": "Tree data: City of Sydney, CC BY 4.0",
+        "locationType": "tree",
+        "scientificName": "Prunus x blireana",
+        "commonName": "Purple-leafed Plum",
+        "locationConfidence": "Official",
+        "taxonConfidence": "Species confirmed",
+        "evidenceSummary": "Official City of Sydney public tree asset; curator-reviewed for public access and conservatively classified from the source taxonomy.",
+        "provenance": {
+          "provider": "City of Sydney",
+          "dataset": "Trees",
+          "sourceRecordId": "TS28232",
+          "serviceRowId": "8237",
+          "sourceUrl": "https://data.cityofsydney.nsw.gov.au/api/search/v1/collections/dataset/items/15c4713a688a48fcb604fc343118af05_0",
+          "licence": "CC BY 4.0",
+          "importedAt": "2026-08-20T21:18:33.635Z",
+          "reviewedAt": "2026-08-21T00:00:00.000Z"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          151.176662348764,
+          -33.8810994226028
+        ]
+      },
+      "properties": {
+        "id": "city-of-sydney:TS28234",
+        "name": "Prunus x blireana — City of Sydney",
+        "suburb": "City of Sydney",
+        "group": "Flowering plum",
+        "access": "Public access",
+        "lastChecked": "2026-08-20",
+        "source": "Tree data: City of Sydney, CC BY 4.0",
+        "locationType": "tree",
+        "scientificName": "Prunus x blireana",
+        "commonName": "Purple-leafed Plum",
+        "locationConfidence": "Official",
+        "taxonConfidence": "Species confirmed",
+        "evidenceSummary": "Official City of Sydney public tree asset; curator-reviewed for public access and conservatively classified from the source taxonomy.",
+        "provenance": {
+          "provider": "City of Sydney",
+          "dataset": "Trees",
+          "sourceRecordId": "TS28234",
+          "serviceRowId": "8241",
+          "sourceUrl": "https://data.cityofsydney.nsw.gov.au/api/search/v1/collections/dataset/items/15c4713a688a48fcb604fc343118af05_0",
+          "licence": "CC BY 4.0",
+          "importedAt": "2026-08-20T21:18:33.635Z",
+          "reviewedAt": "2026-08-21T00:00:00.000Z"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          151.176673298176,
+          -33.8812047270029
+        ]
+      },
+      "properties": {
+        "id": "city-of-sydney:TS28235",
+        "name": "Prunus x blireana — City of Sydney",
+        "suburb": "City of Sydney",
+        "group": "Flowering plum",
+        "access": "Public access",
+        "lastChecked": "2026-08-20",
+        "source": "Tree data: City of Sydney, CC BY 4.0",
+        "locationType": "tree",
+        "scientificName": "Prunus x blireana",
+        "commonName": "Purple-leafed Plum",
+        "locationConfidence": "Official",
+        "taxonConfidence": "Species confirmed",
+        "evidenceSummary": "Official City of Sydney public tree asset; curator-reviewed for public access and conservatively classified from the source taxonomy.",
+        "provenance": {
+          "provider": "City of Sydney",
+          "dataset": "Trees",
+          "sourceRecordId": "TS28235",
+          "serviceRowId": "8245",
+          "sourceUrl": "https://data.cityofsydney.nsw.gov.au/api/search/v1/collections/dataset/items/15c4713a688a48fcb604fc343118af05_0",
+          "licence": "CC BY 4.0",
+          "importedAt": "2026-08-20T21:18:33.635Z",
+          "reviewedAt": "2026-08-21T00:00:00.000Z"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          151.176690402572,
+          -33.8813256323496
+        ]
+      },
+      "properties": {
+        "id": "city-of-sydney:TS28236",
+        "name": "Prunus x blireana — City of Sydney",
+        "suburb": "City of Sydney",
+        "group": "Flowering plum",
+        "access": "Public access",
+        "lastChecked": "2026-08-20",
+        "source": "Tree data: City of Sydney, CC BY 4.0",
+        "locationType": "tree",
+        "scientificName": "Prunus x blireana",
+        "commonName": "Purple-leafed Plum",
+        "locationConfidence": "Official",
+        "taxonConfidence": "Species confirmed",
+        "evidenceSummary": "Official City of Sydney public tree asset; curator-reviewed for public access and conservatively classified from the source taxonomy.",
+        "provenance": {
+          "provider": "City of Sydney",
+          "dataset": "Trees",
+          "sourceRecordId": "TS28236",
+          "serviceRowId": "8249",
+          "sourceUrl": "https://data.cityofsydney.nsw.gov.au/api/search/v1/collections/dataset/items/15c4713a688a48fcb604fc343118af05_0",
+          "licence": "CC BY 4.0",
+          "importedAt": "2026-08-20T21:18:33.635Z",
+          "reviewedAt": "2026-08-21T00:00:00.000Z"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          151.176715332691,
+          -33.8815004871166
+        ]
+      },
+      "properties": {
+        "id": "city-of-sydney:TS28237",
+        "name": "Prunus x blireana — City of Sydney",
+        "suburb": "City of Sydney",
+        "group": "Flowering plum",
+        "access": "Public access",
+        "lastChecked": "2026-08-20",
+        "source": "Tree data: City of Sydney, CC BY 4.0",
+        "locationType": "tree",
+        "scientificName": "Prunus x blireana",
+        "commonName": "Purple-leafed Plum",
+        "locationConfidence": "Official",
+        "taxonConfidence": "Species confirmed",
+        "evidenceSummary": "Official City of Sydney public tree asset; curator-reviewed for public access and conservatively classified from the source taxonomy.",
+        "provenance": {
+          "provider": "City of Sydney",
+          "dataset": "Trees",
+          "sourceRecordId": "TS28237",
+          "serviceRowId": "8253",
+          "sourceUrl": "https://data.cityofsydney.nsw.gov.au/api/search/v1/collections/dataset/items/15c4713a688a48fcb604fc343118af05_0",
+          "licence": "CC BY 4.0",
+          "importedAt": "2026-08-20T21:18:33.635Z",
+          "reviewedAt": "2026-08-21T00:00:00.000Z"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          151.176725927166,
+          -33.8815919897057
+        ]
+      },
+      "properties": {
+        "id": "city-of-sydney:TS28238",
+        "name": "Prunus x blireana — City of Sydney",
+        "suburb": "City of Sydney",
+        "group": "Flowering plum",
+        "access": "Public access",
+        "lastChecked": "2026-08-20",
+        "source": "Tree data: City of Sydney, CC BY 4.0",
+        "locationType": "tree",
+        "scientificName": "Prunus x blireana",
+        "commonName": "Purple-leafed Plum",
+        "locationConfidence": "Official",
+        "taxonConfidence": "Species confirmed",
+        "evidenceSummary": "Official City of Sydney public tree asset; curator-reviewed for public access and conservatively classified from the source taxonomy.",
+        "provenance": {
+          "provider": "City of Sydney",
+          "dataset": "Trees",
+          "sourceRecordId": "TS28238",
+          "serviceRowId": "8257",
+          "sourceUrl": "https://data.cityofsydney.nsw.gov.au/api/search/v1/collections/dataset/items/15c4713a688a48fcb604fc343118af05_0",
+          "licence": "CC BY 4.0",
+          "importedAt": "2026-08-20T21:18:33.635Z",
+          "reviewedAt": "2026-08-21T00:00:00.000Z"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          151.176753187456,
+          -33.8817996119379
+        ]
+      },
+      "properties": {
+        "id": "city-of-sydney:TS28240",
+        "name": "Prunus x blireana — City of Sydney",
+        "suburb": "City of Sydney",
+        "group": "Flowering plum",
+        "access": "Public access",
+        "lastChecked": "2026-08-20",
+        "source": "Tree data: City of Sydney, CC BY 4.0",
+        "locationType": "tree",
+        "scientificName": "Prunus x blireana",
+        "commonName": "Purple-leafed Plum",
+        "locationConfidence": "Official",
+        "taxonConfidence": "Species confirmed",
+        "evidenceSummary": "Official City of Sydney public tree asset; curator-reviewed for public access and conservatively classified from the source taxonomy.",
+        "provenance": {
+          "provider": "City of Sydney",
+          "dataset": "Trees",
+          "sourceRecordId": "TS28240",
+          "serviceRowId": "8261",
+          "sourceUrl": "https://data.cityofsydney.nsw.gov.au/api/search/v1/collections/dataset/items/15c4713a688a48fcb604fc343118af05_0",
+          "licence": "CC BY 4.0",
+          "importedAt": "2026-08-20T21:18:33.635Z",
+          "reviewedAt": "2026-08-21T00:00:00.000Z"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          151.189419198611,
+          -33.9114913102973
+        ]
+      },
+      "properties": {
+        "id": "city-of-sydney:TS06358",
+        "name": "Prunus cerasifera Nigra — City of Sydney",
+        "suburb": "City of Sydney",
+        "group": "Flowering plum",
+        "access": "Public access",
+        "lastChecked": "2026-08-20",
+        "source": "Tree data: City of Sydney, CC BY 4.0",
+        "locationType": "tree",
+        "scientificName": "Prunus cerasifera Nigra",
+        "commonName": "Black Cherry Plum",
+        "locationConfidence": "Official",
+        "taxonConfidence": "Species confirmed",
+        "evidenceSummary": "Official City of Sydney public tree asset; curator-reviewed for public access and conservatively classified from the source taxonomy.",
+        "provenance": {
+          "provider": "City of Sydney",
+          "dataset": "Trees",
+          "sourceRecordId": "TS06358",
+          "serviceRowId": "14937",
+          "sourceUrl": "https://data.cityofsydney.nsw.gov.au/api/search/v1/collections/dataset/items/15c4713a688a48fcb604fc343118af05_0",
+          "licence": "CC BY 4.0",
+          "importedAt": "2026-08-20T21:18:33.635Z",
+          "reviewedAt": "2026-08-21T00:00:00.000Z"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          151.189395411456,
+          -33.911531899231
+        ]
+      },
+      "properties": {
+        "id": "city-of-sydney:TS06359",
+        "name": "Prunus cerasifera Nigra — City of Sydney",
+        "suburb": "City of Sydney",
+        "group": "Flowering plum",
+        "access": "Public access",
+        "lastChecked": "2026-08-20",
+        "source": "Tree data: City of Sydney, CC BY 4.0",
+        "locationType": "tree",
+        "scientificName": "Prunus cerasifera Nigra",
+        "commonName": "Black Cherry Plum",
+        "locationConfidence": "Official",
+        "taxonConfidence": "Species confirmed",
+        "evidenceSummary": "Official City of Sydney public tree asset; curator-reviewed for public access and conservatively classified from the source taxonomy.",
+        "provenance": {
+          "provider": "City of Sydney",
+          "dataset": "Trees",
+          "sourceRecordId": "TS06359",
+          "serviceRowId": "14939",
+          "sourceUrl": "https://data.cityofsydney.nsw.gov.au/api/search/v1/collections/dataset/items/15c4713a688a48fcb604fc343118af05_0",
+          "licence": "CC BY 4.0",
+          "importedAt": "2026-08-20T21:18:33.635Z",
+          "reviewedAt": "2026-08-21T00:00:00.000Z"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          151.206796404625,
+          -33.9171944364437
+        ]
+      },
+      "properties": {
+        "id": "city-of-sydney:TS13885",
+        "name": "Prunus sp. — City of Sydney",
+        "suburb": "City of Sydney",
+        "group": "Mixed ornamental Prunus",
+        "access": "Public access",
+        "lastChecked": "2026-08-20",
+        "source": "Tree data: City of Sydney, CC BY 4.0",
+        "locationType": "tree",
+        "scientificName": "Prunus sp.",
+        "commonName": "Unknown",
+        "locationConfidence": "Official",
+        "taxonConfidence": "Genus confirmed",
+        "evidenceSummary": "Official City of Sydney public tree asset; curator-reviewed for public access and conservatively classified from the source taxonomy.",
+        "provenance": {
+          "provider": "City of Sydney",
+          "dataset": "Trees",
+          "sourceRecordId": "TS13885",
+          "serviceRowId": "21049",
+          "sourceUrl": "https://data.cityofsydney.nsw.gov.au/api/search/v1/collections/dataset/items/15c4713a688a48fcb604fc343118af05_0",
+          "licence": "CC BY 4.0",
+          "importedAt": "2026-08-20T21:18:33.635Z",
+          "reviewedAt": "2026-08-21T00:00:00.000Z"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          151.206543162531,
+          -33.917939369221
+        ]
+      },
+      "properties": {
+        "id": "city-of-sydney:TS13874",
+        "name": "Prunus cerasifera — City of Sydney",
+        "suburb": "City of Sydney",
+        "group": "Flowering plum",
+        "access": "Public access",
+        "lastChecked": "2026-08-20",
+        "source": "Tree data: City of Sydney, CC BY 4.0",
+        "locationType": "tree",
+        "scientificName": "Prunus cerasifera",
+        "commonName": "Cherry Plum",
+        "locationConfidence": "Official",
+        "taxonConfidence": "Species confirmed",
+        "evidenceSummary": "Official City of Sydney public tree asset; curator-reviewed for public access and conservatively classified from the source taxonomy.",
+        "provenance": {
+          "provider": "City of Sydney",
+          "dataset": "Trees",
+          "sourceRecordId": "TS13874",
+          "serviceRowId": "22052",
+          "sourceUrl": "https://data.cityofsydney.nsw.gov.au/api/search/v1/collections/dataset/items/15c4713a688a48fcb604fc343118af05_0",
+          "licence": "CC BY 4.0",
+          "importedAt": "2026-08-20T21:18:33.635Z",
+          "reviewedAt": "2026-08-21T00:00:00.000Z"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          151.226162467817,
+          -33.8869653427921
+        ]
+      },
+      "properties": {
+        "id": "city-of-sydney:TS35634",
+        "name": "Prunus cerasifera — City of Sydney",
+        "suburb": "City of Sydney",
+        "group": "Flowering plum",
+        "access": "Public access",
+        "lastChecked": "2026-08-20",
+        "source": "Tree data: City of Sydney, CC BY 4.0",
+        "locationType": "tree",
+        "scientificName": "Prunus cerasifera",
+        "commonName": "Cherry Plum",
+        "locationConfidence": "Official",
+        "taxonConfidence": "Species confirmed",
+        "evidenceSummary": "Official City of Sydney public tree asset; curator-reviewed for public access and conservatively classified from the source taxonomy.",
+        "provenance": {
+          "provider": "City of Sydney",
+          "dataset": "Trees",
+          "sourceRecordId": "TS35634",
+          "serviceRowId": "42865",
+          "sourceUrl": "https://data.cityofsydney.nsw.gov.au/api/search/v1/collections/dataset/items/15c4713a688a48fcb604fc343118af05_0",
+          "licence": "CC BY 4.0",
+          "importedAt": "2026-08-20T21:18:33.635Z",
+          "reviewedAt": "2026-08-21T00:00:00.000Z"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          151.219062416331,
+          -33.8839442218603
+        ]
+      },
+      "properties": {
+        "id": "city-of-sydney:TS37304",
+        "name": "Prunus sp. — City of Sydney",
+        "suburb": "City of Sydney",
+        "group": "Flowering plum",
+        "access": "Public access",
+        "lastChecked": "2026-08-20",
+        "source": "Tree data: City of Sydney, CC BY 4.0",
+        "locationType": "tree",
+        "scientificName": "Prunus sp.",
+        "commonName": "Plum",
+        "locationConfidence": "Official",
+        "taxonConfidence": "Genus confirmed",
+        "evidenceSummary": "Official City of Sydney public tree asset; curator-reviewed for public access and conservatively classified from the source taxonomy.",
+        "provenance": {
+          "provider": "City of Sydney",
+          "dataset": "Trees",
+          "sourceRecordId": "TS37304",
+          "serviceRowId": "43120",
+          "sourceUrl": "https://data.cityofsydney.nsw.gov.au/api/search/v1/collections/dataset/items/15c4713a688a48fcb604fc343118af05_0",
+          "licence": "CC BY 4.0",
+          "importedAt": "2026-08-20T21:18:33.635Z",
+          "reviewedAt": "2026-08-21T00:00:00.000Z"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          151.221205544145,
+          -33.8715684514528
+        ]
+      },
+      "properties": {
+        "id": "city-of-sydney:TS42302",
+        "name": "Prunus cerasifera — City of Sydney",
+        "suburb": "City of Sydney",
+        "group": "Flowering plum",
+        "access": "Public access",
+        "lastChecked": "2026-08-20",
+        "source": "Tree data: City of Sydney, CC BY 4.0",
+        "locationType": "tree",
+        "scientificName": "Prunus cerasifera",
+        "commonName": "Not Applicable",
+        "locationConfidence": "Official",
+        "taxonConfidence": "Species confirmed",
+        "evidenceSummary": "Official City of Sydney public tree asset; curator-reviewed for public access and conservatively classified from the source taxonomy.",
+        "provenance": {
+          "provider": "City of Sydney",
+          "dataset": "Trees",
+          "sourceRecordId": "TS42302",
+          "serviceRowId": "44818",
+          "sourceUrl": "https://data.cityofsydney.nsw.gov.au/api/search/v1/collections/dataset/items/15c4713a688a48fcb604fc343118af05_0",
+          "licence": "CC BY 4.0",
+          "importedAt": "2026-08-20T21:18:33.635Z",
+          "reviewedAt": "2026-08-21T00:00:00.000Z"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          151.196293484266,
+          -33.8887306551413
+        ]
+      },
+      "properties": {
+        "id": "city-of-sydney:TS44629",
+        "name": "Prunus sp. — City of Sydney",
+        "suburb": "City of Sydney",
+        "group": "Flowering plum",
+        "access": "Public access",
+        "lastChecked": "2026-08-20",
+        "source": "Tree data: City of Sydney, CC BY 4.0",
+        "locationType": "tree",
+        "scientificName": "Prunus sp.",
+        "commonName": "Plum",
+        "locationConfidence": "Official",
+        "taxonConfidence": "Genus confirmed",
+        "evidenceSummary": "Official City of Sydney public tree asset; curator-reviewed for public access and conservatively classified from the source taxonomy.",
+        "provenance": {
+          "provider": "City of Sydney",
+          "dataset": "Trees",
+          "sourceRecordId": "TS44629",
+          "serviceRowId": "45928",
+          "sourceUrl": "https://data.cityofsydney.nsw.gov.au/api/search/v1/collections/dataset/items/15c4713a688a48fcb604fc343118af05_0",
+          "licence": "CC BY 4.0",
+          "importedAt": "2026-08-20T21:18:33.635Z",
+          "reviewedAt": "2026-08-21T00:00:00.000Z"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          151.205873332759,
+          -33.9167415731644
+        ]
+      },
+      "properties": {
+        "id": "city-of-sydney:TS45272",
+        "name": "Prunus sp. — City of Sydney",
+        "suburb": "City of Sydney",
+        "group": "Mixed ornamental Prunus",
+        "access": "Public access",
+        "lastChecked": "2026-08-20",
+        "source": "Tree data: City of Sydney, CC BY 4.0",
+        "locationType": "tree",
+        "scientificName": "Prunus sp.",
+        "commonName": "Not Applicable",
+        "locationConfidence": "Official",
+        "taxonConfidence": "Genus confirmed",
+        "evidenceSummary": "Official City of Sydney public tree asset; curator-reviewed for public access and conservatively classified from the source taxonomy.",
+        "provenance": {
+          "provider": "City of Sydney",
+          "dataset": "Trees",
+          "sourceRecordId": "TS45272",
+          "serviceRowId": "46277",
+          "sourceUrl": "https://data.cityofsydney.nsw.gov.au/api/search/v1/collections/dataset/items/15c4713a688a48fcb604fc343118af05_0",
+          "licence": "CC BY 4.0",
+          "importedAt": "2026-08-20T21:18:33.635Z",
+          "reviewedAt": "2026-08-21T00:00:00.000Z"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          151.189807919664,
+          -33.9056498206611
+        ]
+      },
+      "properties": {
+        "id": "city-of-sydney:TS45399",
+        "name": "Prunus sp. — City of Sydney",
+        "suburb": "City of Sydney",
+        "group": "Mixed ornamental Prunus",
+        "access": "Public access",
+        "lastChecked": "2026-08-20",
+        "source": "Tree data: City of Sydney, CC BY 4.0",
+        "locationType": "tree",
+        "scientificName": "Prunus sp.",
+        "commonName": "Not Applicable",
+        "locationConfidence": "Official",
+        "taxonConfidence": "Genus confirmed",
+        "evidenceSummary": "Official City of Sydney public tree asset; curator-reviewed for public access and conservatively classified from the source taxonomy.",
+        "provenance": {
+          "provider": "City of Sydney",
+          "dataset": "Trees",
+          "sourceRecordId": "TS45399",
+          "serviceRowId": "46392",
+          "sourceUrl": "https://data.cityofsydney.nsw.gov.au/api/search/v1/collections/dataset/items/15c4713a688a48fcb604fc343118af05_0",
+          "licence": "CC BY 4.0",
+          "importedAt": "2026-08-20T21:18:33.635Z",
+          "reviewedAt": "2026-08-21T00:00:00.000Z"
+        }
+      }
+    }
+  ]
 }
