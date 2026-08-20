@@ -87,3 +87,27 @@ The act of accepting a Candidate record or correction into the Reviewed dataset 
 ### Publication path
 
 The only Version 1 path from source data to public information: Source refresh, Candidate record, Curator promotion through reviewed pull request, merge to `main`, then Cloudflare Pages automatically rebuilds and deploys the static site.
+
+### Version 1 launch threshold
+
+The minimum content threshold for public launch: at least 100 reviewed, publicly accessible Locations across Greater Sydney.
+
+### Launch experience check
+
+A manual pre-launch check on mobile and keyboard-only use. It covers search, filters, map/list switching, and Location details; automated checks alone are insufficient.
+
+### Closed beta
+
+The first Version 1 release phase: a two-week invitation-only period for local users before public promotion. It is used to correct data and experience defects while the Reviewed dataset remains manageable.
+
+### Launch integrity gate
+
+Version 1 cannot leave Closed beta while any privacy, access, attribution, or critical usability defect is unresolved.
+
+### Optional launch extras
+
+Public GeoJSON/CSV downloads and visible correction or removal-request links are valuable Version 1 features but are not launch blockers.
+
+### Version 2 entry
+
+The product owner may initiate Version 2 planning after Version 1 launches, without a fixed time, usage-volume, or curator-workload threshold. Version 2's privacy, moderation, storage, and retention decisions must still be settled before public crowdsourcing launches.
