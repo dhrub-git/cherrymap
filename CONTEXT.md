@@ -59,3 +59,7 @@ A Source import manually triggered by a Curator. It is reviewed before its outpu
 ### Displayable photo
 
 Media that CherryMap created or has an explicit licence or permission to display. Publicly accessible media is not automatically Displayable photo.
+
+### Map-first finder
+
+The selected Version 1 visitor experience. The map is the primary surface, with immediate search, lightweight filters, and a compact results sheet that lets visitors compare nearby Locations without leaving the map.
