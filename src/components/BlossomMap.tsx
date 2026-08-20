@@ -19,13 +19,16 @@ export function BlossomMap({ locations, selectedId, onSelect }: Props) {
   }, []);
 
   useEffect(() => {
+    const instance = map.current;
+    if (!instance) return;
     markers.current.forEach((marker) => marker.remove());
     markers.current = locations.map((location) => {
       const element = document.createElement("button");
       element.type = "button"; element.ariaLabel = `Open ${location.name}`; element.className = "map-marker"; element.style.background = blossomColor[location.group];
       element.onclick = () => onSelect(location.id);
-      return new maplibregl.Marker({ element, anchor: "bottom" }).setLngLat(location.coordinates).addTo(map.current!);
+      return new maplibregl.Marker({ element, anchor: "bottom" }).setLngLat(location.coordinates).addTo(instance);
     });
+    return () => { markers.current.forEach((marker) => marker.remove()); markers.current = []; };
   }, [locations, onSelect]);
 
   useEffect(() => {
@@ -33,5 +36,5 @@ export function BlossomMap({ locations, selectedId, onSelect }: Props) {
     if (selected && map.current) map.current.flyTo({ center: selected.coordinates, zoom: 13, essential: true, duration: 700 });
   }, [locations, selectedId]);
 
-  return <div ref={container} className="h-full min-h-[520px] w-full" aria-label="Interactive blossom location map" />;
+  return <div ref={container} role="region" className="h-full min-h-[520px] w-full" aria-label="Interactive blossom location map" />;
 }
