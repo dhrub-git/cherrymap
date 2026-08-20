@@ -1,23 +1,27 @@
 import { mkdir, writeFile } from "node:fs/promises";
 
 export const CITY_OF_SYDNEY_TREES_URL = "https://services1.arcgis.com/cNVyNtjGVZybOQWZ/arcgis/rest/services/Trees/FeatureServer/0/query";
-const PAGE_SIZE = 2_000;
+const CITY_OF_SYDNEY_LAYER_URL = "https://services1.arcgis.com/cNVyNtjGVZybOQWZ/arcgis/rest/services/Trees/FeatureServer/0";
+const PAGE_SIZE = 1_000;
 const SOURCE_URL = "https://data.cityofsydney.nsw.gov.au/api/search/v1/collections/dataset/items/15c4713a688a48fcb604fc343118af05_0";
+const REQUIRED_FIELDS = ["OBJECTID", "asset_id", "SpeciesName", "CommonName", "TreeType", "Tree_Status"];
 
 export function toCandidate(feature) {
   const properties = feature.properties ?? {};
-  const sourceRecordId = properties.asset_id ?? properties.OBJECTID;
-  if (!sourceRecordId || feature.geometry?.type !== "Point" || !Array.isArray(feature.geometry.coordinates)) return null;
+  const assetId = properties.asset_id;
+  const objectId = properties.OBJECTID;
+  if (!assetId || !objectId || feature.geometry?.type !== "Point" || !Array.isArray(feature.geometry.coordinates)) return null;
   return {
     type: "Feature",
     geometry: feature.geometry,
     properties: {
-      candidateId: `city-of-sydney:${sourceRecordId}`,
+      candidateId: `city-of-sydney:${assetId}`,
       reviewStatus: "candidate",
       source: {
         provider: "City of Sydney",
         dataset: "Trees",
-        sourceRecordId: String(sourceRecordId),
+        sourceRecordId: String(assetId),
+        serviceRowId: String(objectId),
         sourceUrl: SOURCE_URL,
         licence: "CC BY 4.0",
         importedAt: new Date().toISOString(),
@@ -32,6 +36,7 @@ export function toCandidate(feature) {
 }
 
 export async function fetchCitySydneyCandidates(fetchImpl = fetch) {
+  await verifySourceMetadata(fetchImpl);
   const candidates = [];
   for (let offset = 0; ; offset += PAGE_SIZE) {
     const params = new URLSearchParams({
@@ -52,6 +57,18 @@ export async function fetchCitySydneyCandidates(fetchImpl = fetch) {
     if (page.features.length < PAGE_SIZE) break;
   }
   return candidates;
+}
+
+export async function verifySourceMetadata(fetchImpl = fetch) {
+  const [layerResponse, sourceResponse] = await Promise.all([
+    fetchImpl(`${CITY_OF_SYDNEY_LAYER_URL}?f=json`),
+    fetchImpl(SOURCE_URL),
+  ]);
+  if (!layerResponse.ok || !sourceResponse.ok) throw new Error("City of Sydney source metadata could not be verified.");
+  const [layer, source] = await Promise.all([layerResponse.json(), sourceResponse.json()]);
+  const fields = new Set(Array.isArray(layer.fields) ? layer.fields.map((field) => field.name) : []);
+  if (layer.name !== "Trees" || REQUIRED_FIELDS.some((field) => !fields.has(field))) throw new Error("City of Sydney source schema changed; candidate import stopped.");
+  if (!JSON.stringify(source).toLowerCase().includes("cc by 4.0")) throw new Error("City of Sydney source licence could not be verified; candidate import stopped.");
 }
 
 export async function runImport() {
