@@ -49,6 +49,7 @@ function App() {
   const selectLocation = (id: string) => update({ selectedId: id });
 
   return <main className="relative h-svh overflow-hidden bg-harbour text-ink">
+    <h1 className="sr-only">CherryMap — Greater Sydney blossom finder</h1>
     <BlossomMap locations={visible} selectedId={state.selectedId} onSelect={selectLocation} />
     <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(255,250,241,.92)_0,rgba(255,250,241,.18)_22%,transparent_40%)]" aria-hidden="true" />
 
