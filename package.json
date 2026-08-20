@@ -4,8 +4,10 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
+    "prepare:data": "node scripts/publish-reviewed-data.mjs",
+    "dev": "npm run prepare:data && vite",
+    "build": "npm run prepare:data && tsc -b && vite build",
+    "import:city-sydney": "node scripts/import-city-sydney.mjs",
     "test": "vitest run",
     "test:watch": "vitest"
   },
