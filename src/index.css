@@ -10,8 +10,8 @@
   --color-peach: #f6d8bf;
   --color-pollen: #efbd68;
   --color-harbour: #c4e1e7;
-  --font-display: Georgia, "Times New Roman", serif;
-  --font-sans: "Avenir Next", Avenir, ui-sans-serif, system-ui, sans-serif;
+  --font-display: georgia, "Times New Roman", serif;
+  --font-sans: "Avenir Next", avenir, ui-sans-serif, system-ui, sans-serif;
 }
 
 @layer base {

@@ -1,8 +1,9 @@
 import fs from "node:fs";
 import { describe, expect, it } from "vitest";
+import { representativeCoordinates } from "./publish-reviewed-data.mjs";
 
 const collection = JSON.parse(fs.readFileSync("data/locations.geojson", "utf8"));
-const features = collection.features as Array<{ geometry: { type: string; coordinates: number[] }; properties: Record<string, unknown> }>;
+const features = collection.features as Array<{ geometry: { type: string; coordinates: unknown }; properties: Record<string, unknown> }>;
 
 describe("reviewed public dataset", () => {
   it("contains unique, source-attributed public locations", () => {
@@ -31,10 +32,22 @@ describe("reviewed public dataset", () => {
     }
   });
 
-  it("keeps all point coordinates inside the Greater Sydney launch bounds", () => {
+  it("keeps valid public geometry inside the Greater Sydney launch bounds", () => {
     for (const feature of features) {
-      if (feature.geometry.type !== "Point") continue;
-      const [longitude, latitude] = feature.geometry.coordinates;
+      expect(["Point", "LineString", "Polygon"]).toContain(feature.geometry.type);
+      if (feature.geometry.type === "LineString") {
+        expect(Array.isArray(feature.geometry.coordinates) && feature.geometry.coordinates.length >= 2).toBe(true);
+      }
+      if (feature.geometry.type === "Polygon") {
+        expect(Array.isArray(feature.geometry.coordinates) && feature.geometry.coordinates.length > 0).toBe(true);
+        for (const ring of feature.geometry.coordinates as unknown[][]) {
+          expect(ring.length).toBeGreaterThanOrEqual(4);
+          expect(ring[0]).toEqual(ring.at(-1));
+        }
+      }
+      const position = representativeCoordinates(feature.geometry);
+      expect(position).not.toBeNull();
+      const [longitude, latitude] = position!;
       expect(longitude).toBeGreaterThanOrEqual(150.4);
       expect(longitude).toBeLessThanOrEqual(151.5);
       expect(latitude).toBeGreaterThanOrEqual(-34.25);

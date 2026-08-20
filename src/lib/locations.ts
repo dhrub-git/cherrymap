@@ -103,15 +103,25 @@ function coordinatePair(value: unknown): [number, number] | null {
     : null;
 }
 
+function positionsEqual(first: [number, number], last: [number, number]) {
+  return first[0] === last[0] && first[1] === last[1];
+}
+
 export function representativeCoordinates(geometry: Record<string, unknown>): [number, number] | null {
   if (geometry.type === "Point") return coordinatePair(geometry.coordinates);
   if (geometry.type === "LineString" && Array.isArray(geometry.coordinates)) {
-    return coordinatePair(geometry.coordinates[Math.floor(geometry.coordinates.length / 2)]);
+    if (geometry.coordinates.length < 2) return null;
+    const line = geometry.coordinates.map(coordinatePair);
+    if (line.some((pair) => !pair)) return null;
+    return line[Math.floor(line.length / 2)];
   }
-  if (geometry.type === "Polygon" && Array.isArray(geometry.coordinates) && Array.isArray(geometry.coordinates[0])) {
-    const ring = geometry.coordinates[0].map(coordinatePair).filter((pair): pair is [number, number] => Boolean(pair));
-    if (!ring.length) return null;
-    return ring.reduce<[number, number]>((sum, pair) => [sum[0] + pair[0] / ring.length, sum[1] + pair[1] / ring.length], [0, 0]);
+  if (geometry.type === "Polygon" && Array.isArray(geometry.coordinates) && geometry.coordinates.length > 0) {
+    const rings = geometry.coordinates.map((coordinates) => Array.isArray(coordinates) ? coordinates.map(coordinatePair) : []);
+    const valid = rings.every((ring) => ring.length >= 4 && ring.every(Boolean)
+      && positionsEqual(ring[0] as [number, number], ring.at(-1) as [number, number]));
+    if (!valid) return null;
+    const outerRing = (rings[0] as [number, number][]).slice(0, -1);
+    return outerRing.reduce<[number, number]>((sum, pair) => [sum[0] + pair[0] / outerRing.length, sum[1] + pair[1] / outerRing.length], [0, 0]);
   }
   return null;
 }

@@ -74,6 +74,22 @@ describe("parseLocations", () => {
     expect(parseLocations({ features: [{ geometry: { type: "Point", coordinates: [151, -33] }, properties: { id: "bad" } }] })).toEqual([]);
   });
 
+  it("rejects the whole dataset when a supported geometry is malformed", () => {
+    const properties = {
+      id: "city:1", name: "Park tree", suburb: "Sydney", group: "Flowering plum", locationType: "tree",
+      access: "Public access", lastChecked: "2026-08-20", source: "Council inventory",
+      locationConfidence: "Official", evidenceSummary: "Official record.",
+      provenance: { provider: "City of Sydney", sourceUrl: "https://example.test" },
+    };
+    const valid = { geometry: { type: "Point", coordinates: [151, -33] }, properties };
+    for (const geometry of [
+      { type: "LineString", coordinates: [[151, -33]] },
+      { type: "Polygon", coordinates: [[[151, -33], [151.1, -33], [151.1, -33.1], [151, -33.1]]] },
+    ]) {
+      expect(parseLocations({ features: [valid, { geometry, properties: { ...properties, id: "bad-geometry" } }] })).toEqual([]);
+    }
+  });
+
   it("formats reviewed dates in Sydney time", () => {
     expect(formatReviewedDate("2026-08-20", { day: "numeric", month: "short" })).toBe("20 Aug");
   });

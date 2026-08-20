@@ -53,16 +53,29 @@ function toFeatureCollection(locations: Location[]): FeatureCollection<Point, Ma
   };
 }
 
+function applySelection(instance: maplibregl.Map, previousId: string | null, selectedId: string | null, locations: Location[]) {
+  if (!instance.getSource(POINT_SOURCE)) return false;
+  if (previousId) instance.setFeatureState({ source: POINT_SOURCE, id: previousId }, { selected: false });
+  if (selectedId) {
+    instance.setFeatureState({ source: POINT_SOURCE, id: selectedId }, { selected: true });
+    const selected = locations.find((location) => location.id === selectedId);
+    if (selected && selectedId !== previousId) instance.flyTo({ center: selected.coordinates, zoom: Math.max(instance.getZoom(), 13), essential: true, duration: 650 });
+  }
+  return true;
+}
+
 export function BlossomMap({ locations, selectedId, onSelect }: Props) {
   const container = useRef<HTMLDivElement>(null);
   const map = useRef<maplibregl.Map | null>(null);
   const locationsRef = useRef(locations);
   const onSelectRef = useRef(onSelect);
+  const selectedIdRef = useRef(selectedId);
   const previousSelectedId = useRef<string | null>(null);
   const [status, setStatus] = useState<"loading" | "ready" | "error">("loading");
 
-  locationsRef.current = locations;
-  onSelectRef.current = onSelect;
+  useEffect(() => { locationsRef.current = locations; }, [locations]);
+  useEffect(() => { onSelectRef.current = onSelect; }, [onSelect]);
+  useEffect(() => { selectedIdRef.current = selectedId; }, [selectedId]);
 
   useEffect(() => {
     if (!container.current || map.current) return;
@@ -107,6 +120,10 @@ export function BlossomMap({ locations, selectedId, onSelect }: Props) {
         layout: { "text-field": ["get", "point_count_abbreviated"], "text-size": 12 },
         paint: { "text-color": "#fffaf1" },
       });
+
+      if (applySelection(instance, previousSelectedId.current, selectedIdRef.current, locationsRef.current)) {
+        previousSelectedId.current = selectedIdRef.current;
+      }
       instance.addLayer({
         id: LOCATION_LAYER,
         type: "circle",
@@ -169,21 +186,23 @@ export function BlossomMap({ locations, selectedId, onSelect }: Props) {
       source?.setData(toFeatureCollection(locations));
     };
     if (instance.isStyleLoaded()) update();
-    else instance.once("load", update);
+    else {
+      instance.once("load", update);
+      return () => { instance.off("load", update); };
+    }
   }, [locations]);
 
   useEffect(() => {
     const instance = map.current;
-    if (!instance || !instance.isStyleLoaded()) return;
-    if (previousSelectedId.current) {
-      instance.setFeatureState({ source: POINT_SOURCE, id: previousSelectedId.current }, { selected: false });
+    if (!instance) return;
+    const update = () => {
+      if (applySelection(instance, previousSelectedId.current, selectedId, locations)) previousSelectedId.current = selectedId;
+    };
+    if (instance.isStyleLoaded()) update();
+    else {
+      instance.once("load", update);
+      return () => { instance.off("load", update); };
     }
-    if (selectedId) {
-      instance.setFeatureState({ source: POINT_SOURCE, id: selectedId }, { selected: true });
-      const selected = locations.find((location) => location.id === selectedId);
-      if (selected) instance.flyTo({ center: selected.coordinates, zoom: Math.max(instance.getZoom(), 13), essential: true, duration: 650 });
-    }
-    previousSelectedId.current = selectedId;
   }, [locations, selectedId]);
 
   return <div className="absolute inset-0" role="region" aria-label="Interactive blossom location map">

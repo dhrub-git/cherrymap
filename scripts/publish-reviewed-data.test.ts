@@ -36,10 +36,21 @@ describe("escapeCsv", () => {
     const geometries = [
       { type: "Point", coordinates: [151.1, -33.9] },
       { type: "LineString", coordinates: [[151.1, -33.9], [151.2, -33.8], [151.3, -33.7]] },
-      { type: "Polygon", coordinates: [[[151.1, -33.9], [151.3, -33.9], [151.3, -33.7], [151.1, -33.7]]] },
+      { type: "Polygon", coordinates: [[[151.1, -33.9], [151.3, -33.9], [151.3, -33.7], [151.1, -33.7], [151.1, -33.9]]] },
     ];
     for (const geometry of geometries) {
       expect(representativeCoordinates(geometry)).toEqual(mapRepresentativeCoordinates(geometry as Record<string, unknown>));
+    }
+  });
+
+  it("rejects incomplete lines and open polygon rings in both consumers", () => {
+    const malformed = [
+      { type: "LineString", coordinates: [[151.1, -33.9]] },
+      { type: "Polygon", coordinates: [[[151.1, -33.9], [151.3, -33.9], [151.3, -33.7], [151.1, -33.7]]] },
+    ];
+    for (const geometry of malformed) {
+      expect(representativeCoordinates(geometry)).toBeNull();
+      expect(mapRepresentativeCoordinates(geometry as Record<string, unknown>)).toBeNull();
     }
   });
 });
