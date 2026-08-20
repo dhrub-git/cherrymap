@@ -65,7 +65,7 @@ function App() {
     <section aria-label="Search and filters" className="absolute inset-x-3 top-[4.25rem] z-20 mx-auto max-w-3xl md:left-6 md:right-auto md:mx-0 md:w-[390px]">
       <label className="flex min-h-12 items-center gap-3 rounded-2xl border border-white/80 bg-white/96 px-4 shadow-[0_12px_38px_rgba(23,59,45,.16)] backdrop-blur">
         <Search className="size-5 shrink-0 text-eucalypt" />
-        <input aria-label="Search locations" value={state.query} onChange={(event) => update({ query: event.target.value, selectedId: null })} className="min-w-0 flex-1 bg-transparent text-sm outline-none placeholder:text-slate-500" placeholder="Suburb, council or tree name" />
+        <input aria-label="Search locations" value={state.query} onChange={(event) => update({ query: event.target.value, selectedId: null })} className="min-w-0 flex-1 bg-transparent text-sm outline-none placeholder:text-slate-500" placeholder="Street, suburb, council or tree" />
         {state.query && <button onClick={() => update({ query: "" })} className="grid size-8 place-items-center rounded-full hover:bg-stone-100" aria-label="Clear search"><X className="size-4" /></button>}
       </label>
 

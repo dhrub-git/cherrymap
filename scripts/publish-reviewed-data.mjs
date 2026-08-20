@@ -1,10 +1,10 @@
 import { cp, mkdir, readFile, writeFile } from "node:fs/promises";
 
 const columns = [
-  "id", "name", "suburb", "councilArea", "locationType", "group",
+  "id", "name", "suburb", "streetAddress", "councilArea", "locationType", "group",
   "scientificName", "commonName", "locationConfidence", "taxonConfidence",
-  "access", "visitorNotes", "evidenceSummary", "lastChecked", "source",
-  "sourceUrl", "licence", "photoUrl", "photoCredit", "longitude", "latitude",
+  "access", "visitorNotes", "visitorInfoUrl", "evidenceSummary", "lastChecked", "source",
+  "sourceUrl", "licence", "reuseBasis", "photoUrl", "photoCredit", "longitude", "latitude",
 ];
 
 export function escapeCsv(value) {
@@ -48,6 +48,7 @@ export function toCsvRow(feature) {
     councilArea: properties.councilArea ?? provenance.provider ?? "",
     sourceUrl: provenance.sourceUrl ?? "",
     licence: provenance.licence ?? "",
+    reuseBasis: provenance.reuseBasis ?? "",
     longitude,
     latitude,
   };

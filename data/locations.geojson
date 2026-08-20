@@ -735,6 +735,43 @@
           "reviewedAt": "2026-08-21T00:00:00.000Z"
         }
       }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          151.0173874,
+          -33.8593518
+        ]
+      },
+      "properties": {
+        "id": "cumberland:auburn-botanic-gardens",
+        "name": "Auburn Botanic Gardens Cherry Blossom Trail",
+        "suburb": "Auburn",
+        "streetAddress": "99 Chiswick Road, Auburn",
+        "councilArea": "Cumberland City Council",
+        "group": "Flowering cherry",
+        "access": "Ticketed venue",
+        "lastChecked": "2026-08-21",
+        "source": "Auburn Botanic Gardens and Cherry Blossom Trail — Cumberland City Council",
+        "locationType": "venue",
+        "commonName": "Cherry blossoms",
+        "locationConfidence": "Official",
+        "taxonConfidence": "Cherry group confirmed; species not published",
+        "evidenceSummary": "Cumberland City Council's official trail page confirms more than 200 blooming cherry trees in the Japanese Gardens. This record marks the public venue, not individual trees.",
+        "visitorNotes": "Check the Council website for current hours, entry fees and festival booking. Follow staff signs; food is not permitted in the Japanese Gardens.",
+        "visitorInfoUrl": "https://www.cumberland.nsw.gov.au/auburn-botanic-gardens",
+        "provenance": {
+          "provider": "Cumberland City Council",
+          "dataset": "Official venue and Cherry Blossom Trail pages",
+          "sourceRecordId": "auburn-botanic-gardens-cherry-blossom-trail",
+          "sourceUrl": "https://www.cumberland.nsw.gov.au/cherry-blossom-trail",
+          "reuseBasis": "Manually curated factual venue record; no Council text, dataset or media reproduced",
+          "importedAt": "2026-08-20T23:43:04.000Z",
+          "reviewedAt": "2026-08-20T23:43:04.000Z"
+        }
+      }
     }
   ]
 }

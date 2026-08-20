@@ -42,6 +42,7 @@ export function parseLocations(value: unknown): Location[] {
       id: properties.id,
       name: properties.name,
       suburb: properties.suburb,
+      streetAddress: stringValue(properties.streetAddress),
       councilArea: stringValue(properties.councilArea) ?? provenance.provider,
       group: properties.group as Location["group"],
       locationType: properties.locationType as LocationType,
@@ -54,6 +55,7 @@ export function parseLocations(value: unknown): Location[] {
       taxonConfidence: stringValue(properties.taxonConfidence),
       evidenceSummary: properties.evidenceSummary,
       visitorNotes: stringValue(properties.visitorNotes),
+      visitorInfoUrl: httpsUrl(properties.visitorInfoUrl),
       photoUrl: httpsUrl(properties.photoUrl),
       photoCredit: stringValue(properties.photoCredit),
       provenance,
@@ -90,6 +92,7 @@ function parseProvenance(value: unknown): LocationProvenance | null {
     dataset: stringValue(value.dataset),
     sourceRecordId: stringValue(value.sourceRecordId),
     licence: stringValue(value.licence),
+    reuseBasis: stringValue(value.reuseBasis),
     importedAt: stringValue(value.importedAt),
     reviewedAt: stringValue(value.reviewedAt),
   };
@@ -132,6 +135,7 @@ export function filterLocations(locations: Location[], filters: LocationFilters)
     const searchable = [
       location.name,
       location.suburb,
+      location.streetAddress,
       location.councilArea,
       location.group,
       location.scientificName,

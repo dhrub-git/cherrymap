@@ -18,6 +18,7 @@ export function LocationDetails({ location, onClose }: Props) {
     <p className="pr-12 text-xs font-bold uppercase tracking-[.17em] text-pollen">{location.group}</p>
     <h1 id="location-title" className="mt-2 pr-10 font-display text-3xl leading-[.98]">{location.name}</h1>
     <p className="mt-3 text-sm text-white/72">{location.suburb}{location.councilArea !== location.suburb && <> · {location.councilArea}</>}</p>
+    {location.streetAddress && <p className="mt-1 text-sm text-white/62">{location.streetAddress}</p>}
 
     {location.photoUrl && <figure className="mt-5 overflow-hidden rounded-2xl bg-white/8"><img src={location.photoUrl} alt={`Blossoms at ${location.name}`} className="aspect-[16/9] w-full object-cover" loading="lazy" />{location.photoCredit && <figcaption className="px-3 py-2 text-[11px] text-white/55">Photo: {location.photoCredit}</figcaption>}</figure>}
 
@@ -31,11 +32,13 @@ export function LocationDetails({ location, onClose }: Props) {
     {location.scientificName && <p className="mt-5 text-sm"><span className="block text-xs font-bold uppercase tracking-wider text-white/50">Scientific name</span><i className="font-display text-lg">{location.scientificName}</i>{location.commonName && <span className="ml-2 text-white/60">({location.commonName})</span>}</p>}
     <p className="mt-4 text-sm leading-relaxed text-white/78">{location.evidenceSummary}</p>
     <p className="mt-3 flex gap-2 text-sm leading-relaxed text-white/70"><ShieldCheck className="mt-0.5 size-4 shrink-0 text-pollen" />{location.visitorNotes ?? "Stay on public paths, respect signs and closures, and do not enter private or operational land."}</p>
+    {location.visitorInfoUrl && <a href={location.visitorInfoUrl} target="_blank" rel="noreferrer" className="mt-2 inline-flex items-center gap-1 text-sm text-peach underline underline-offset-4">Current visitor information<ExternalLink className="size-3" /></a>}
 
     <div className="mt-5 border-t border-white/12 pt-4 text-xs text-white/62">
       <p className="font-bold uppercase tracking-wider text-white/42">Source & attribution</p>
       <a href={location.provenance.sourceUrl} target="_blank" rel="noreferrer" className="mt-1 inline-flex items-center gap-1 text-peach underline underline-offset-4">{location.source}<ExternalLink className="size-3" /></a>
       {location.provenance.licence && <p className="mt-1">Licence: {location.provenance.licence}</p>}
+      {location.provenance.reuseBasis && <p className="mt-1">Reuse basis: {location.provenance.reuseBasis}</p>}
       <p className="mt-1 font-mono">Public position {location.coordinates[1].toFixed(5)}, {location.coordinates[0].toFixed(5)}</p>
     </div>
 
