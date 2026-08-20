@@ -63,3 +63,27 @@ Media that CherryMap created or has an explicit licence or permission to display
 ### Map-first finder
 
 The selected Version 1 visitor experience. The map is the primary surface, with immediate search, lightweight filters, and a compact results sheet that lets visitors compare nearby Locations without leaving the map.
+
+### Candidate record
+
+A Location record produced by a Source import but not yet eligible for the public map. A Curator must explicitly promote it after taxonomy, access, privacy, and attribution review.
+
+### Reviewed dataset
+
+The source-controlled `data/locations.geojson` file. It is the sole public Location source of truth for Version 1 and supports every public geometry type. Public CSV is generated from this dataset.
+
+### Source refresh
+
+A manually triggered import that produces Candidate records and a change report. It must not automatically update the Reviewed dataset; a Curator explicitly accepts every public change.
+
+### Provenance
+
+The source URL, provider-scoped source record ID, licence, import date, and curator review date retained with every published Location. Provenance is required for Version 1 publication.
+
+### Curator promotion
+
+The act of accepting a Candidate record or correction into the Reviewed dataset through a GitHub pull request with at least one review before it is merged into `main`.
+
+### Publication path
+
+The only Version 1 path from source data to public information: Source refresh, Candidate record, Curator promotion through reviewed pull request, merge to `main`, then Cloudflare Pages automatically rebuilds and deploys the static site.
