@@ -47,11 +47,19 @@ describe("reviewed public dataset", () => {
       }
       const position = representativeCoordinates(feature.geometry);
       expect(position).not.toBeNull();
-      const [longitude, latitude] = position!;
-      expect(longitude).toBeGreaterThanOrEqual(150.4);
-      expect(longitude).toBeLessThanOrEqual(151.5);
-      expect(latitude).toBeGreaterThanOrEqual(-34.25);
-      expect(latitude).toBeLessThanOrEqual(-33.35);
+      const positions = feature.geometry.type === "Point"
+        ? [feature.geometry.coordinates]
+        : feature.geometry.type === "LineString"
+          ? feature.geometry.coordinates as unknown[]
+          : (feature.geometry.coordinates as unknown[][]).flat();
+      for (const coordinates of positions) {
+        expect(Array.isArray(coordinates)).toBe(true);
+        const [longitude, latitude] = coordinates as number[];
+        expect(longitude).toBeGreaterThanOrEqual(150.4);
+        expect(longitude).toBeLessThanOrEqual(151.5);
+        expect(latitude).toBeGreaterThanOrEqual(-34.25);
+        expect(latitude).toBeLessThanOrEqual(-33.35);
+      }
     }
   });
 });

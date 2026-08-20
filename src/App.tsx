@@ -93,7 +93,7 @@ function App() {
       <ResultsContent loading={loading} error={error} locations={visible} selectedId={state.selectedId} onSelect={selectLocation} className="h-full overflow-auto p-2 pb-20" />
     </section>}
 
-    {state.view === "map" && (loading || error) && <div className="absolute inset-x-3 bottom-[4.75rem] z-20 md:hidden">{loading ? <LoadingResults /> : <p className="rounded-xl bg-red-50 p-3 text-sm text-red-700" role="alert">{error}</p>}</div>}
+    {state.view === "map" && (loading || error || visible.length === 0) && <div className="absolute inset-x-3 bottom-[4.75rem] z-20 md:hidden">{loading ? <LoadingResults /> : error ? <p className="rounded-xl bg-red-50 p-3 text-sm text-red-700" role="alert">{error}</p> : <EmptyResults />}</div>}
 
     <div className="absolute bottom-3 left-1/2 z-20 flex -translate-x-1/2 rounded-full border border-white/80 bg-paper/96 p-1 shadow-[0_12px_36px_rgba(23,59,45,.24)] md:hidden" aria-label="View switcher">
       <button onClick={() => update({ view: "map" })} className={`view-switch ${state.view === "map" ? "active" : ""}`} aria-pressed={state.view === "map"}><MapIcon className="size-4" />Map</button>
