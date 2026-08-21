@@ -1,9 +1,9 @@
 import { Download, Info, Leaf, List, Map as MapIcon, Plus, Search, SlidersHorizontal, X } from "lucide-react";
-import { useEffect, useMemo, useRef, useState } from "react";
-import { BlossomMap } from "@/components/BlossomMap";
+import { lazy, Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { InfoPanel } from "@/components/InfoPanel";
 import { LocationDetails } from "@/components/LocationDetails";
 import { LocationList } from "@/components/LocationList";
+import { MapLoadBoundary } from "@/components/MapLoadBoundary";
 import { Button } from "@/components/ui/button";
 import { blossomGroups } from "@/lib/blossom-groups";
 import { buildExplorerSearch, defaultExplorerState, readExplorerState, type ExplorerState } from "@/lib/explorer-state";
@@ -15,6 +15,7 @@ import type { Location, LocationFilters } from "@/types/location";
 const groups: LocationFilters["group"][] = ["All blossoms", ...blossomGroups.map((group) => group.label)];
 const locationTypeOptions: LocationFilters["locationType"][] = ["All types", ...locationTypes.map((type) => type.value)];
 const accessOptions: LocationFilters["access"][] = ["All access", "Public access", "Ticketed venue"];
+const BlossomMap = lazy(() => import("@/components/BlossomMap").then((module) => ({ default: module.BlossomMap })));
 
 function initialState() {
   return typeof window === "undefined" ? defaultExplorerState : readExplorerState(window.location.search);
@@ -63,7 +64,11 @@ function App() {
 
   return <main className="relative h-svh overflow-hidden bg-harbour text-ink">
     <h1 className="sr-only">CherryMap — Greater Sydney blossom finder</h1>
-    <BlossomMap locations={visible} selectedId={state.selectedId} onSelect={selectLocation} />
+    <MapLoadBoundary>
+      <Suspense fallback={<div className="absolute inset-0" role="region" aria-label="Interactive blossom location map"><span className="sr-only" role="status">Loading map</span></div>}>
+        <BlossomMap locations={visible} selectedId={state.selectedId} onSelect={selectLocation} />
+      </Suspense>
+    </MapLoadBoundary>
     <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(255,250,241,.92)_0,rgba(255,250,241,.18)_22%,transparent_40%)]" aria-hidden="true" />
 
     <header className="absolute inset-x-0 top-0 z-20 flex h-[4.25rem] items-center justify-between px-4 md:px-6">
