@@ -137,7 +137,7 @@ Use:
 - Tailwind CSS and shadcn/ui for the interface.
 - MapLibre GL JS for map rendering.
 - Static GeoJSON/CSV files as the product dataset.
-- Static hosting on Cloudflare Pages, Netlify, or Vercel.
+- Static hosting on Vercel.
 
 Do not use Next.js, a database, Supabase, server-side API routes, or background jobs in Version 1.
 

@@ -24,10 +24,18 @@ describe("reviewed public dataset", () => {
         provenance: {
           provider: expect.any(String),
           sourceUrl: expect.stringMatching(/^https:\/\//),
-          reviewedAt: expect.any(String),
+          sourceRecordId: expect.any(String),
+          importedAt: expect.stringMatching(/^\d{4}-\d{2}-\d{2}T/),
+          reviewedAt: expect.stringMatching(/^\d{4}-\d{2}-\d{2}T/),
         },
       });
       const provenance = feature.properties.provenance as Record<string, unknown>;
+      for (const field of ["provider", "sourceUrl", "sourceRecordId", "importedAt", "reviewedAt"]) {
+        expect(typeof provenance[field] === "string" && provenance[field].trim().length > 0).toBe(true);
+      }
+      for (const field of ["importedAt", "reviewedAt"]) {
+        expect(new Date(provenance[field] as string).toISOString()).toBe(provenance[field]);
+      }
       expect([provenance.licence, provenance.reuseBasis].some((value) => typeof value === "string" && value.trim().length > 0)).toBe(true);
       expect(JSON.stringify(feature.properties).toLowerCase()).not.toContain("private residential");
     }
