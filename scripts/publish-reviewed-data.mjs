@@ -1,5 +1,6 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { representativeCoordinates } from "../src/lib/public-geometry.mjs";
+import { assessReviewedCollection } from "./reviewed-location-validation.mjs";
 
 const columns = [
   "id", "name", "suburb", "streetAddress", "councilArea", "locationType", "group",
@@ -37,9 +38,15 @@ export function csvForCollection(collection) {
   return `${columns.join(",")}\n${rows.join("\n")}${rows.length ? "\n" : ""}`;
 }
 
+export function assertPublishableReviewedData(collection) {
+  const { reasons } = assessReviewedCollection(collection);
+  if (reasons.length) throw new Error(`Cannot publish reviewed dataset:\n${reasons.map((reason) => `- ${reason}`).join("\n")}`);
+}
+
 export async function publishReviewedData() {
   await mkdir("public/data", { recursive: true });
   const collection = JSON.parse(await readFile("data/locations.geojson", "utf8"));
+  assertPublishableReviewedData(collection);
   await writeFile("public/data/locations.geojson", `${JSON.stringify(collection, null, 2)}\n`);
   await writeFile("public/data/locations.csv", csvForCollection(collection));
 }
