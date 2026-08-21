@@ -64,6 +64,16 @@ describe("V1 data readiness", () => {
     expect(result.reasons).toContain("Public CSV does not match the canonical reviewed dataset.");
   });
 
+  it("does not count duplicate stable IDs toward the launch threshold", () => {
+    const data = collection(V1_MINIMUM_REVIEWED_LOCATIONS);
+    data.features[99].properties.id = data.features[0].properties.id;
+    const result = assessV1DataReadiness(data, `${JSON.stringify(data, null, 2)}\n`, csvForCollection(data));
+
+    expect(result.ready).toBe(false);
+    expect(result.locationCount).toBe(98);
+    expect(result.reasons).toContain(`Requires at least ${V1_MINIMUM_REVIEWED_LOCATIONS} reviewed public locations; found 98.`);
+  });
+
   it("does not count malformed, unsafe, or out-of-bounds records toward the threshold", () => {
     const data = collection(V1_MINIMUM_REVIEWED_LOCATIONS);
     data.features[0].properties.provenance = {};

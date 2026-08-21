@@ -80,8 +80,13 @@ export function assessReviewedCollection(collection) {
   }
   if (collection.features.length === 0) return { locationCount: 0, reasons: ["Canonical data has no reviewed public locations."] };
 
-  const invalidFeatureCount = collection.features.filter((feature) => validateReviewedLocation(feature).length > 0).length;
   const ids = collection.features.map((feature) => feature?.properties?.id);
+  const idCounts = new Map();
+  for (const id of ids) if (typeof id === "string" && id.trim()) idCounts.set(id, (idCounts.get(id) ?? 0) + 1);
+  const invalidFeatureCount = collection.features.filter((feature) => {
+    const id = feature?.properties?.id;
+    return validateReviewedLocation(feature).length > 0 || idCounts.get(id) !== 1;
+  }).length;
   const reasons = [];
   if (invalidFeatureCount) reasons.push(`${invalidFeatureCount} locations fail reviewed-public validation.`);
   if (ids.some((id) => typeof id !== "string" || !id.trim()) || new Set(ids).size !== ids.length) reasons.push("Every published location must have a unique stable ID.");
