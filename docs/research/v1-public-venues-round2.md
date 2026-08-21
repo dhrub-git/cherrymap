@@ -42,7 +42,7 @@ Richmond Park is a useful lead but its only species inventory located in this au
 - Suburb: `Westmead`
 - Group: `Flowering peach`
 - Scientific name: `Prunus persica cv.`
-- Taxon confidence: species confirmed by the venue manager
+- Taxon confidence: species confirmed by the official venue page; cultivar not published
 - Location type: `venue`
 - Access: `Public access; pedestrian entry 24 hours a day, 7 days a week`
 - Street address: `1 Hainsworth Street, Westmead NSW 2145`
