@@ -1,24 +1,14 @@
 import { readFile } from "node:fs/promises";
 import { csvForCollection } from "./publish-reviewed-data.mjs";
-import { validateReviewedLocation } from "./reviewed-location-validation.mjs";
+import { assessReviewedCollection } from "./reviewed-location-validation.mjs";
 
 export const V1_MINIMUM_REVIEWED_LOCATIONS = 100;
 
-function featureId(feature) {
-  return typeof feature?.properties?.id === "string" && feature.properties.id.trim() ? feature.properties.id : null;
-}
-
 export function assessV1DataReadiness(collection, publicGeojson, csv, minimumLocations = V1_MINIMUM_REVIEWED_LOCATIONS) {
-  const features = Array.isArray(collection?.features) ? collection.features : [];
-  const ids = features.map(featureId).filter(Boolean);
-  const invalidFeatureCount = features.filter((feature) => validateReviewedLocation(feature).length > 0).length;
-  const reviewedLocations = features.length - invalidFeatureCount;
-  const reasons = [];
+  const { locationCount: reviewedLocations, reasons: collectionReasons } = assessReviewedCollection(collection);
+  const reasons = [...collectionReasons];
 
-  if (collection?.type !== "FeatureCollection") reasons.push("Canonical data is not a GeoJSON FeatureCollection.");
-  if (invalidFeatureCount) reasons.push(`${invalidFeatureCount} locations fail reviewed-public validation.`);
   if (reviewedLocations < minimumLocations) reasons.push(`Requires at least ${minimumLocations} reviewed public locations; found ${reviewedLocations}.`);
-  if (ids.length !== features.length || new Set(ids).size !== features.length) reasons.push("Every published location must have a unique stable ID.");
   if (publicGeojson !== JSON.stringify(collection, null, 2).concat("\n")) reasons.push("Public GeoJSON does not match the canonical reviewed dataset.");
   if (csv !== csvForCollection(collection)) reasons.push("Public CSV does not match the canonical reviewed dataset.");
 

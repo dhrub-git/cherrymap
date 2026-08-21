@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { representativeCoordinates as mapRepresentativeCoordinates } from "../src/lib/locations";
-import { csvForCollection, escapeCsv, representativeCoordinates, toCsvRow } from "./publish-reviewed-data.mjs";
+import { assertPublishableReviewedData, csvForCollection, escapeCsv, representativeCoordinates, toCsvRow } from "./publish-reviewed-data.mjs";
+import { assessReviewedCollection } from "./reviewed-location-validation.mjs";
 
 describe("escapeCsv", () => {
   it("prevents spreadsheet formula evaluation while retaining CSV escaping", () => {
@@ -43,6 +44,13 @@ describe("escapeCsv", () => {
 
   it("returns a header-only CSV for a malformed collection", () => {
     expect(csvForCollection(null)).toMatch(/^id,name,suburb,/);
+  });
+
+  it("refuses to publish malformed or duplicate reviewed records", () => {
+    const malformed = { type: "FeatureCollection", features: [{ type: "Feature", properties: { id: "same" }, geometry: { type: "Point", coordinates: [151, -33.8] } }, { type: "Feature", properties: { id: "same" }, geometry: { type: "Point", coordinates: [151, -33.8] } }] };
+
+    expect(assessReviewedCollection(malformed).reasons).toContain("Every published location must have a unique stable ID.");
+    expect(() => assertPublishableReviewedData(malformed)).toThrow("Cannot publish reviewed dataset");
   });
 
   it("keeps map and CSV representative positions in parity", () => {

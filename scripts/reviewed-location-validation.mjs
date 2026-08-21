@@ -73,3 +73,17 @@ export function validateReviewedLocation(feature) {
   }
   return reasons;
 }
+
+export function assessReviewedCollection(collection) {
+  if (collection?.type !== "FeatureCollection" || !Array.isArray(collection.features)) {
+    return { locationCount: 0, reasons: ["Canonical data is not a GeoJSON FeatureCollection."] };
+  }
+  if (collection.features.length === 0) return { locationCount: 0, reasons: ["Canonical data has no reviewed public locations."] };
+
+  const invalidFeatureCount = collection.features.filter((feature) => validateReviewedLocation(feature).length > 0).length;
+  const ids = collection.features.map((feature) => feature?.properties?.id);
+  const reasons = [];
+  if (invalidFeatureCount) reasons.push(`${invalidFeatureCount} locations fail reviewed-public validation.`);
+  if (ids.some((id) => typeof id !== "string" || !id.trim()) || new Set(ids).size !== ids.length) reasons.push("Every published location must have a unique stable ID.");
+  return { locationCount: collection.features.length - invalidFeatureCount, reasons };
+}
