@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import * as maplibregl from "maplibre-gl";
 import maplibreWorkerUrl from "maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url";
-import type { Feature, FeatureCollection, Point } from "geojson";
 import { blossomGroups } from "@/lib/blossom-groups";
 import { locationTypes } from "@/lib/location-types";
+import { footprintFeatures, markerFeatures } from "@/lib/map-features";
 import type { Location } from "@/types/location";
 
 type Props = {
@@ -12,16 +12,14 @@ type Props = {
   onSelect: (id: string) => void;
 };
 
-type MapProperties = {
-  id: string;
-  name: string;
-  group: Location["group"];
-  locationType: Location["locationType"];
-};
-
 const POINT_SOURCE = "blossom-points";
+const FOOTPRINT_SOURCE = "blossom-footprints";
 const CLUSTER_LAYER = "blossom-clusters";
 const LOCATION_LAYER = "blossom-locations";
+const FOOTPRINT_FILL_LAYER = "blossom-footprint-fill";
+const FOOTPRINT_LINE_LAYER = "blossom-footprint-line";
+const SELECTABLE_LOCATION_LAYERS = [FOOTPRINT_FILL_LAYER, FOOTPRINT_LINE_LAYER, LOCATION_LAYER];
+const INTERACTIVE_LAYERS = [CLUSTER_LAYER, ...SELECTABLE_LOCATION_LAYERS];
 
 maplibregl.setWorkerUrl(maplibreWorkerUrl);
 
@@ -39,28 +37,17 @@ const locationTypeSymbolExpression = [
   locationTypes[0].symbol,
 ] as unknown as maplibregl.ExpressionSpecification;
 
-function toFeatureCollection(locations: Location[]): FeatureCollection<Point, MapProperties> {
-  return {
-    type: "FeatureCollection",
-    features: locations.map((location): Feature<Point, MapProperties> => ({
-      type: "Feature",
-      id: location.id,
-      geometry: { type: "Point", coordinates: location.coordinates },
-      properties: {
-        id: location.id,
-        name: location.name,
-        group: location.group,
-        locationType: location.locationType,
-      },
-    })),
-  };
+function setLocationSelectionState(instance: maplibregl.Map, id: string, selected: boolean) {
+  for (const source of [POINT_SOURCE, FOOTPRINT_SOURCE]) {
+    if (instance.getSource(source)) instance.setFeatureState({ source, id }, { selected });
+  }
 }
 
 function applySelection(instance: maplibregl.Map, previousId: string | null, selectedId: string | null, locations: Location[]) {
   if (!instance.getSource(POINT_SOURCE)) return false;
-  if (previousId) instance.setFeatureState({ source: POINT_SOURCE, id: previousId }, { selected: false });
+  if (previousId) setLocationSelectionState(instance, previousId, false);
   if (selectedId) {
-    instance.setFeatureState({ source: POINT_SOURCE, id: selectedId }, { selected: true });
+    setLocationSelectionState(instance, selectedId, true);
     const selected = locations.find((location) => location.id === selectedId);
     if (selected && selectedId !== previousId) instance.flyTo({ center: selected.coordinates, zoom: Math.max(instance.getZoom(), 13), essential: true, duration: 650 });
   }
@@ -95,9 +82,31 @@ export function BlossomMap({ locations, selectedId, onSelect }: Props) {
     instance.on("load", () => {
       window.clearTimeout(loadTimeout);
       setStatus("ready");
+      instance.addSource(FOOTPRINT_SOURCE, { type: "geojson", data: footprintFeatures(locationsRef.current) });
+      instance.addLayer({
+        id: FOOTPRINT_FILL_LAYER,
+        type: "fill",
+        source: FOOTPRINT_SOURCE,
+        filter: ["==", "$type", "Polygon"],
+        paint: {
+          "fill-color": blossomColorExpression,
+          "fill-opacity": ["case", ["boolean", ["feature-state", "selected"], false], 0.42, 0.2],
+        },
+      });
+      instance.addLayer({
+        id: FOOTPRINT_LINE_LAYER,
+        type: "line",
+        source: FOOTPRINT_SOURCE,
+        filter: ["in", "$type", "LineString", "Polygon"],
+        paint: {
+          "line-color": blossomColorExpression,
+          "line-width": ["case", ["boolean", ["feature-state", "selected"], false], 5, 3],
+          "line-opacity": 0.92,
+        },
+      });
       instance.addSource(POINT_SOURCE, {
         type: "geojson",
-        data: toFeatureCollection(locationsRef.current),
+        data: markerFeatures(locationsRef.current),
         cluster: true,
         clusterMaxZoom: 13,
         clusterRadius: 48,
@@ -163,11 +172,13 @@ export function BlossomMap({ locations, selectedId, onSelect }: Props) {
           instance.easeTo({ center: feature.geometry.coordinates as [number, number], zoom });
         }
       });
-      instance.on("click", LOCATION_LAYER, (event) => {
-        const id = event.features?.[0]?.properties?.id;
-        if (typeof id === "string") onSelectRef.current(id);
-      });
-      for (const layer of [CLUSTER_LAYER, LOCATION_LAYER]) {
+      for (const layer of SELECTABLE_LOCATION_LAYERS) {
+        instance.on("click", layer, (event) => {
+          const id = event.features?.[0]?.properties?.id;
+          if (typeof id === "string") onSelectRef.current(id);
+        });
+      }
+      for (const layer of INTERACTIVE_LAYERS) {
         instance.on("mouseenter", layer, () => { instance.getCanvas().style.cursor = "pointer"; });
         instance.on("mouseleave", layer, () => { instance.getCanvas().style.cursor = ""; });
       }
@@ -186,7 +197,9 @@ export function BlossomMap({ locations, selectedId, onSelect }: Props) {
     if (!instance) return;
     const update = () => {
       const source = instance.getSource(POINT_SOURCE) as maplibregl.GeoJSONSource | undefined;
-      source?.setData(toFeatureCollection(locations));
+      source?.setData(markerFeatures(locations));
+      const footprints = instance.getSource(FOOTPRINT_SOURCE) as maplibregl.GeoJSONSource | undefined;
+      footprints?.setData(footprintFeatures(locations));
     };
     if (instance.isStyleLoaded()) update();
     else {
