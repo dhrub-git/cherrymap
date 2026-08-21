@@ -36,11 +36,11 @@ Both are within the Greater Sydney launch bounds in `CONTEXT.md`, have a current
 
 **Publication/reuse basis if later confirmed:** manually curated factual venue record. Retain direct links to both sources and review date; do not copy the Heritage NSW description, Council photographs, site maps, or any tree-position data. Heritage NSW’s botanical material is a heritage-record observation, not a current flowering assertion. Obtain current botanical confirmation and reconfirm the operator schedule before publication.
 
-### Linnwood purple-plum heritage landscape
+### Linnwood plum heritage landscape
 
 | Field | Recommended value |
 | --- | --- |
-| Name | `Linnwood Heritage Landscape Purple Plums` |
+| Name | `Linnwood Heritage Landscape Plum` |
 | Suburb | Guildford |
 | Blossom group | Flowering plum |
 | Scientific name | `Prunus cerasifera cv.` |
@@ -48,7 +48,7 @@ Both are within the Greater Sydney launch bounds in `CONTEXT.md`, have a current
 | Location type | Venue |
 | Public venue coordinate | longitude `150.9754265130`, latitude `-33.8546296069` |
 | Coordinate source | [Heritage NSW's Linnwood record](https://apps.environment.nsw.gov.au/dpcheritageapp/ViewHeritageItemDetails.aspx?ID=5052822) gives the estate-level latitude/longitude and the `11–35 Byron Road, Guildford` address. Use the venue point only. |
-| Current visitor access | The [Friends of Linnwood 2026 calendar](https://www.linnwood.org.au/open-days-and-public-meetings.php) lists public open days in March, July, September and November, normally 11am–3pm, plus special events; dates may change. |
+| Current visitor access | The [Friends of Linnwood 2026 calendar](https://www.linnwood.org.au/open-days-and-public-meetings.php) lists public open days and special events in March, July, September and November. Hours vary by event and dates may change; visitors must check the current calendar. |
 | Access/safety copy | `Historic landscape access is limited to advertised open days or special events. Check the current calendar before travelling and remain on visitor routes.` |
 
 **Evidence and rationale**
