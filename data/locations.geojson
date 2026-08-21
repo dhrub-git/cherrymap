@@ -883,6 +883,157 @@
           "reviewedAt": "2026-08-21T00:02:30.000Z"
         }
       }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          150.9951386,
+          -33.8037627
+        ]
+      },
+      "properties": {
+        "id": "greater-sydney-parklands:wistaria-gardens-flowering-peaches",
+        "name": "Wistaria Gardens Flowering Peaches",
+        "suburb": "Westmead",
+        "streetAddress": "1 Hainsworth Street, Westmead",
+        "councilArea": "City of Parramatta",
+        "group": "Flowering peach",
+        "access": "Public access",
+        "lastChecked": "2026-08-21",
+        "source": "Wistaria Gardens — Greater Sydney Parklands",
+        "locationType": "venue",
+        "scientificName": "Prunus persica cv.",
+        "commonName": "Flowering peach",
+        "locationConfidence": "Official",
+        "taxonConfidence": "Species confirmed by the official venue page; cultivars not published",
+        "evidenceSummary": "Greater Sydney Parklands lists flowering peach, Prunus persica cultivars, among Wistaria Gardens' plant species. This area-level record marks the public garden, not individual trees.",
+        "visitorNotes": "Pedestrian access is available at all hours, but restoration work can affect routes. Use the current venue guidance and enter from public garden paths rather than the former hospital site.",
+        "visitorInfoUrl": "https://www.greatersydneyparklands.nsw.gov.au/explore/wistaria-gardens",
+        "provenance": {
+          "provider": "Greater Sydney Parklands",
+          "dataset": "Official Wistaria Gardens venue page",
+          "sourceRecordId": "wistaria-gardens-flowering-peach",
+          "sourceUrl": "https://www.greatersydneyparklands.nsw.gov.au/explore/wistaria-gardens",
+          "reuseBasis": "Manually curated factual venue record; no source text, dataset, plan diagram or media reproduced",
+          "importedAt": "2026-08-21T00:37:23.000Z",
+          "reviewedAt": "2026-08-21T00:37:23.000Z"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          150.907628313,
+          -33.6758158602
+        ]
+      },
+      "properties": {
+        "id": "heritage-nsw:rouse-hill-estate-purple-cherry-plum",
+        "name": "Rouse Hill Estate Purple Cherry Plum",
+        "suburb": "Rouse Hill",
+        "streetAddress": "356 Annangrove Road, Rouse Hill",
+        "councilArea": "Blacktown City Council",
+        "group": "Flowering plum",
+        "access": "Ticketed venue",
+        "lastChecked": "2026-08-21",
+        "source": "Rouse Hill House and Farm — Heritage NSW",
+        "locationType": "venue",
+        "scientificName": "Prunus cerasifera ‘Nigra’",
+        "commonName": "Purple cherry plum",
+        "locationConfidence": "Official",
+        "taxonConfidence": "Cultivar confirmed in the official heritage record",
+        "evidenceSummary": "Heritage NSW records purple cherry plum, Prunus cerasifera ‘Nigra’, among the estate garden's notable plantings, citing a 2019 site visit. This pin marks the estate, not the individual tree.",
+        "visitorNotes": "Entry is free but advance booking is recommended. The estate normally opens Sundays; keep to well-trodden paths and check for weather or conservation closures.",
+        "visitorInfoUrl": "https://mhnsw.au/visit-us/rouse-hill-estate/plan-your-visit/",
+        "provenance": {
+          "provider": "Heritage NSW",
+          "dataset": "State Heritage Inventory",
+          "sourceRecordId": "5044989",
+          "sourceUrl": "https://apps.environment.nsw.gov.au/dpcheritageapp/ViewHeritageItemDetails.aspx?ID=5044989",
+          "reuseBasis": "Manually curated factual venue record; no source text, dataset or media reproduced",
+          "importedAt": "2026-08-21T00:37:23.000Z",
+          "reviewedAt": "2026-08-21T00:37:23.000Z"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          151.168191,
+          -33.7671812
+        ]
+      },
+      "properties": {
+        "id": "ku-ring-gai:swain-gardens-cherry-blossoms",
+        "name": "Swain Gardens Cherry Blossoms",
+        "suburb": "Killara",
+        "streetAddress": "77 Stanhope Road, Killara",
+        "councilArea": "Ku-ring-gai Council",
+        "group": "Flowering cherry",
+        "access": "Public access",
+        "lastChecked": "2026-08-21",
+        "source": "Swain Gardens records — Ku-ring-gai Council",
+        "locationType": "venue",
+        "scientificName": "Prunus sp.",
+        "commonName": "Cherry blossoms",
+        "locationConfidence": "Official",
+        "taxonConfidence": "Official common name and genus only; species and cultivar not confirmed",
+        "evidenceSummary": "Ku-ring-gai Council's annual report identifies white cherry blossom at Swain Gardens, and its adopted landscape master plan records cherry trees near the gazebo. This pin marks the public garden, not individual trees.",
+        "visitorNotes": "The gardens normally open daily from 8am to 6pm. Access includes narrow paths, steep inclines and steps; keep dogs leashed and stay on established paths.",
+        "visitorInfoUrl": "https://www.krg.nsw.gov.au/Things-to-do/Parks-playgrounds-and-sportsfields/Swain-Gardens",
+        "provenance": {
+          "provider": "Ku-ring-gai Council",
+          "dataset": "Official annual report and Swain Gardens landscape master plan",
+          "sourceRecordId": "swain-gardens-cherry-blossoms",
+          "sourceUrl": "https://www.krg.nsw.gov.au/files/assets/public/v/2/hptrim/information-management-publications-public-website-ku-ring-gai-council-website-council/annual-report-2021-2022.pdf",
+          "reuseBasis": "Manually curated factual venue record; no Council text, dataset, plan diagram or media reproduced",
+          "importedAt": "2026-08-21T00:37:23.000Z",
+          "reviewedAt": "2026-08-21T00:37:23.000Z"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          151.201773542328,
+          -33.8763133956536
+        ]
+      },
+      "properties": {
+        "id": "property-nsw:chinese-garden-pink-plum-blossom",
+        "name": "Chinese Garden of Friendship Pink Plum Blossom",
+        "suburb": "Darling Harbour",
+        "streetAddress": "Pier Street at Harbour Street, Darling Harbour",
+        "councilArea": "City of Sydney",
+        "group": "Flowering plum",
+        "access": "Ticketed venue",
+        "lastChecked": "2026-08-21",
+        "source": "Chinese Garden spring blooms — Darling Harbour",
+        "locationType": "venue",
+        "commonName": "Pink plum blossom",
+        "locationConfidence": "Official",
+        "taxonConfidence": "Official common name and hybrid parent description only; exact taxon not confirmed",
+        "evidenceSummary": "The official Darling Harbour garden article identifies Chinese plum blossoms and describes its pink plum blossom as a cross with purple-leaved plum. This venue-level record does not assign an unsupported botanical hybrid name.",
+        "visitorNotes": "The garden has paid daily admission and closes on Good Friday and Christmas Day. Visitors must remain on stone or paved paths and must not enter garden beds, lawns, trees or rockeries.",
+        "visitorInfoUrl": "https://www.darlingharbour.com/precincts/chinese-garden",
+        "provenance": {
+          "provider": "Property NSW",
+          "dataset": "Official Darling Harbour garden article",
+          "sourceRecordId": "chinese-garden-pink-plum-blossom",
+          "sourceUrl": "https://www.darlingharbour.com/editorials/whats-blooming-this-spring",
+          "reuseBasis": "Manually curated factual venue record; no source text, dataset or media reproduced",
+          "importedAt": "2026-08-21T00:37:23.000Z",
+          "reviewedAt": "2026-08-21T00:37:23.000Z"
+        }
+      }
     }
   ]
 }
