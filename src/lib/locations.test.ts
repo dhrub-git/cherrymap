@@ -15,7 +15,14 @@ const locations: Location[] = [{
   scientificName: "Prunus serrulata",
   locationConfidence: "Official",
   evidenceSummary: "Official public tree record.",
-  provenance: { provider: "City of Parramatta", sourceUrl: "https://example.test" },
+  provenance: {
+    provider: "City of Parramatta",
+    sourceUrl: "https://example.test",
+    sourceRecordId: "tree-1",
+    licence: "CC BY 4.0",
+    importedAt: "2026-08-20T00:00:00.000Z",
+    reviewedAt: "2026-08-20T01:00:00.000Z",
+  },
   geometry: { type: "Point", coordinates: [151, -33] },
   coordinates: [151, -33],
 }];
@@ -63,7 +70,14 @@ describe("parseLocations", () => {
         visitorInfoUrl: "https://example.test/visit",
         locationConfidence: "Official",
         evidenceSummary: "Official record.",
-        provenance: { provider: "City of Sydney", sourceUrl: "https://example.test", licence: "CC BY 4.0" },
+        provenance: {
+          provider: "City of Sydney",
+          sourceUrl: "https://example.test",
+          sourceRecordId: "tree-1",
+          licence: "CC BY 4.0",
+          importedAt: "2026-08-20T00:00:00.000Z",
+          reviewedAt: "2026-08-20T01:00:00.000Z",
+        },
       },
     }] });
 
@@ -74,7 +88,14 @@ describe("parseLocations", () => {
       locationConfidence: "Official",
       evidenceSummary: "Official record.",
       visitorInfoUrl: "https://example.test/visit",
-      provenance: { sourceUrl: "https://example.test", licence: "CC BY 4.0" },
+      provenance: {
+        provider: "City of Sydney",
+        sourceUrl: "https://example.test",
+        sourceRecordId: "tree-1",
+        licence: "CC BY 4.0",
+        importedAt: "2026-08-20T00:00:00.000Z",
+        reviewedAt: "2026-08-20T01:00:00.000Z",
+      },
     });
   });
 
@@ -87,7 +108,14 @@ describe("parseLocations", () => {
       id: "city:1", name: "Park tree", suburb: "Sydney", group: "Flowering plum", locationType: "tree",
       access: "Public access", lastChecked: "2026-08-20", source: "Council inventory",
       locationConfidence: "Official", evidenceSummary: "Official record.",
-      provenance: { provider: "City of Sydney", sourceUrl: "https://example.test" },
+      provenance: {
+        provider: "City of Sydney",
+        sourceUrl: "https://example.test",
+        sourceRecordId: "tree-1",
+        licence: "CC BY 4.0",
+        importedAt: "2026-08-20T00:00:00.000Z",
+        reviewedAt: "2026-08-20T01:00:00.000Z",
+      },
     };
     const valid = { geometry: { type: "Point", coordinates: [151, -33] }, properties };
     for (const geometry of [
@@ -95,6 +123,37 @@ describe("parseLocations", () => {
       { type: "Polygon", coordinates: [[[151, -33], [151.1, -33], [151.1, -33.1], [151, -33.1]]] },
     ]) {
       expect(parseLocations({ features: [valid, { geometry, properties: { ...properties, id: "bad-geometry" } }] })).toEqual([]);
+    }
+  });
+
+  it("enforces required provenance and accepts either evidence basis", () => {
+    const properties = {
+      id: "city:1", name: "Park tree", suburb: "Sydney", group: "Flowering plum", locationType: "tree",
+      access: "Public access", lastChecked: "2026-08-20", source: "Council inventory",
+      locationConfidence: "Official", evidenceSummary: "Official record.",
+    };
+    const provenance = {
+      provider: "City of Sydney",
+      sourceUrl: "https://example.test",
+      sourceRecordId: "tree-1",
+      licence: "CC BY 4.0",
+      importedAt: "2026-08-20T00:00:00.000Z",
+      reviewedAt: "2026-08-20T01:00:00.000Z",
+    };
+    const withoutLicence: Record<string, string> = { ...provenance };
+    delete withoutLicence.licence;
+    expect(parseLocations({ features: [{
+      geometry: { type: "Point", coordinates: [151, -33] },
+      properties: { ...properties, provenance: { ...withoutLicence, reuseBasis: "Manually curated facts" } },
+    }] })).toHaveLength(1);
+    for (const invalid of [
+      { ...provenance, sourceRecordId: "" },
+      { ...provenance, sourceUrl: "http://example.test" },
+      { ...provenance, importedAt: "20 August 2026" },
+      { ...provenance, reviewedAt: "" },
+      { ...provenance, licence: "", reuseBasis: "" },
+    ]) {
+      expect(parseLocations({ features: [{ geometry: { type: "Point", coordinates: [151, -33] }, properties: { ...properties, provenance: invalid } }] })).toEqual([]);
     }
   });
 

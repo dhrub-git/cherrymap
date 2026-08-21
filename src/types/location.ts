@@ -8,16 +8,18 @@ export type { LocationType } from "@/lib/location-types";
 export type AccessStatus = "Public access" | "Ticketed venue";
 export type LocationConfidence = "Official" | "Verified" | "Probable" | "Unknown";
 
+type ProvenanceBasis =
+  | { licence: string; reuseBasis?: string }
+  | { licence?: string; reuseBasis: string };
+
 export type LocationProvenance = {
   provider: string;
   dataset?: string;
-  sourceRecordId?: string;
+  sourceRecordId: string;
   sourceUrl: string;
-  licence?: string;
-  reuseBasis?: string;
-  importedAt?: string;
-  reviewedAt?: string;
-};
+  importedAt: string;
+  reviewedAt: string;
+} & ProvenanceBasis;
 
 export type Location = {
   id: string;

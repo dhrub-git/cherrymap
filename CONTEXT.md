@@ -78,7 +78,7 @@ A manually triggered import that produces Candidate records and a change report.
 
 ### Provenance
 
-The source URL, provider-scoped source record ID, licence, import date, and curator review date retained with every published Location. Provenance is required for Version 1 publication.
+The source URL, provider-scoped source record ID, import date, curator review date, and either the applicable licence/permission or a documented factual reuse basis retained with every published Location. A factual reuse basis is valid only for manually curated facts that do not republish protected source text, datasets, or media. Provenance is required for Version 1 publication.
 
 ### Curator promotion
 
@@ -86,7 +86,7 @@ The act of accepting a Candidate record or correction into the Reviewed dataset 
 
 ### Publication path
 
-The only Version 1 path from source data to public information: Source refresh, Candidate record, Curator promotion through reviewed pull request, merge to `main`, then Cloudflare Pages automatically rebuilds and deploys the static site.
+The only Version 1 path from source data to public information: Source refresh, Candidate record, Curator promotion through reviewed pull request, merge to `main`, then Vercel automatically rebuilds and deploys the static site.
 
 ### Version 1 launch threshold
 

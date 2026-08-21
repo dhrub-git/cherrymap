@@ -84,17 +84,29 @@ function httpsUrl(value: unknown) {
   try { return new URL(text).protocol === "https:" ? text : undefined; } catch { return undefined; }
 }
 
+function isoTimestamp(value: unknown) {
+  const text = stringValue(value);
+  if (!text) return undefined;
+  const date = new Date(text);
+  return Number.isFinite(date.getTime()) && date.toISOString() === text ? text : undefined;
+}
+
 function parseProvenance(value: unknown): LocationProvenance | null {
-  if (!isRecord(value) || typeof value.provider !== "string" || typeof value.sourceUrl !== "string") return null;
+  if (!isRecord(value)) return null;
+  const provider = stringValue(value.provider);
+  const sourceUrl = httpsUrl(value.sourceUrl);
+  const sourceRecordId = stringValue(value.sourceRecordId);
+  const importedAt = isoTimestamp(value.importedAt);
+  const reviewedAt = isoTimestamp(value.reviewedAt);
+  const licence = stringValue(value.licence);
+  const reuseBasis = stringValue(value.reuseBasis);
+  if (!provider || !sourceUrl || !sourceRecordId || !importedAt || !reviewedAt || (!licence && !reuseBasis)) return null;
+  const basis: LocationProvenance = licence
+    ? { provider, sourceUrl, sourceRecordId, importedAt, reviewedAt, licence, ...(reuseBasis ? { reuseBasis } : {}) }
+    : { provider, sourceUrl, sourceRecordId, importedAt, reviewedAt, reuseBasis: reuseBasis as string };
   return {
-    provider: value.provider,
-    sourceUrl: value.sourceUrl,
+    ...basis,
     dataset: stringValue(value.dataset),
-    sourceRecordId: stringValue(value.sourceRecordId),
-    licence: stringValue(value.licence),
-    reuseBasis: stringValue(value.reuseBasis),
-    importedAt: stringValue(value.importedAt),
-    reviewedAt: stringValue(value.reviewedAt),
   };
 }
 
