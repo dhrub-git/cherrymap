@@ -1,5 +1,5 @@
-import { fireEvent, render, screen } from "@testing-library/react";
-import { describe, expect, it, vi } from "vitest";
+import { cleanup, fireEvent, render, screen } from "@testing-library/react";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { LocationDetails } from "./LocationDetails";
 import type { Location } from "@/types/location";
 
@@ -28,6 +28,8 @@ const location: Location = {
   coordinates: [151, -33],
 };
 
+afterEach(cleanup);
+
 describe("LocationDetails", () => {
   it("moves focus into the sheet, closes with Escape, and restores focus", () => {
     const opener = document.createElement("button");
@@ -46,5 +48,37 @@ describe("LocationDetails", () => {
     unmount();
     expect(opener).toHaveFocus();
     opener.remove();
+  });
+
+  it("leaves Escape to an open modal dialog", () => {
+    const onClose = vi.fn();
+    render(<LocationDetails location={location} onClose={onClose} />);
+    const modal = document.createElement("dialog");
+    modal.setAttribute("open", "");
+    document.body.append(modal);
+
+    fireEvent.keyDown(document, { key: "Escape" });
+    expect(onClose).not.toHaveBeenCalled();
+
+    modal.remove();
+    fireEvent.keyDown(document, { key: "Escape" });
+    expect(onClose).toHaveBeenCalledOnce();
+  });
+
+  it("restores focus to the result that opened the current location", () => {
+    const firstOpener = document.createElement("button");
+    const secondOpener = document.createElement("button");
+    document.body.append(firstOpener, secondOpener);
+    firstOpener.focus();
+    const { rerender, unmount } = render(<LocationDetails location={location} onClose={vi.fn()} />);
+
+    secondOpener.focus();
+    rerender(<LocationDetails location={{ ...location, id: "city:tree-2", name: "Second park tree" }} onClose={vi.fn()} />);
+    expect(screen.getByRole("button", { name: "Close location details" })).toHaveFocus();
+
+    unmount();
+    expect(secondOpener).toHaveFocus();
+    firstOpener.remove();
+    secondOpener.remove();
   });
 });
