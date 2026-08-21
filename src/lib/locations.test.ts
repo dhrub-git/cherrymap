@@ -88,7 +88,14 @@ describe("parseLocations", () => {
       locationConfidence: "Official",
       evidenceSummary: "Official record.",
       visitorInfoUrl: "https://example.test/visit",
-      provenance: { sourceUrl: "https://example.test", sourceRecordId: "tree-1", licence: "CC BY 4.0" },
+      provenance: {
+        provider: "City of Sydney",
+        sourceUrl: "https://example.test",
+        sourceRecordId: "tree-1",
+        licence: "CC BY 4.0",
+        importedAt: "2026-08-20T00:00:00.000Z",
+        reviewedAt: "2026-08-20T01:00:00.000Z",
+      },
     });
   });
 
@@ -119,7 +126,7 @@ describe("parseLocations", () => {
     }
   });
 
-  it("rejects incomplete or invalid provenance", () => {
+  it("enforces required provenance and accepts either evidence basis", () => {
     const properties = {
       id: "city:1", name: "Park tree", suburb: "Sydney", group: "Flowering plum", locationType: "tree",
       access: "Public access", lastChecked: "2026-08-20", source: "Council inventory",
@@ -133,6 +140,12 @@ describe("parseLocations", () => {
       importedAt: "2026-08-20T00:00:00.000Z",
       reviewedAt: "2026-08-20T01:00:00.000Z",
     };
+    const withoutLicence: Record<string, string> = { ...provenance };
+    delete withoutLicence.licence;
+    expect(parseLocations({ features: [{
+      geometry: { type: "Point", coordinates: [151, -33] },
+      properties: { ...properties, provenance: { ...withoutLicence, reuseBasis: "Manually curated facts" } },
+    }] })).toHaveLength(1);
     for (const invalid of [
       { ...provenance, sourceRecordId: "" },
       { ...provenance, sourceUrl: "http://example.test" },
