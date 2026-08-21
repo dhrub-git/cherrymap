@@ -16,7 +16,7 @@ export function LocationDetails({ location, onClose }: Props) {
   return <aside aria-labelledby="location-title" className="detail-sheet absolute inset-x-3 bottom-[4.75rem] z-30 mx-auto max-h-[68svh] overflow-auto rounded-[1.75rem] bg-ink p-5 text-white shadow-[0_24px_80px_rgba(12,38,28,.42)] md:inset-x-auto md:bottom-6 md:right-6 md:w-[410px] md:max-h-[calc(100svh-3rem)]">
     <button onClick={onClose} className="absolute right-4 top-4 grid size-9 place-items-center rounded-full bg-white/10 hover:bg-white/20" aria-label="Close location details"><X className="size-5" /></button>
     <p className="pr-12 text-xs font-bold uppercase tracking-[.17em] text-pollen">{location.group}</p>
-    <h1 id="location-title" className="mt-2 pr-10 font-display text-3xl leading-[.98]">{location.name}</h1>
+    <h2 id="location-title" className="mt-2 pr-10 font-display text-3xl leading-[.98]">{location.name}</h2>
     <p className="mt-3 text-sm text-white/72">{location.suburb}{location.councilArea !== location.suburb && <> · {location.councilArea}</>}</p>
     {location.streetAddress && <p className="mt-1 text-sm text-white/62">{location.streetAddress}</p>}
 
