@@ -15,7 +15,14 @@ const locations: Location[] = [{
   scientificName: "Prunus serrulata",
   locationConfidence: "Official",
   evidenceSummary: "Official public tree record.",
-  provenance: { provider: "City of Parramatta", sourceUrl: "https://example.test" },
+  provenance: {
+    provider: "City of Parramatta",
+    sourceUrl: "https://example.test",
+    sourceRecordId: "tree-1",
+    licence: "CC BY 4.0",
+    importedAt: "2026-08-20T00:00:00.000Z",
+    reviewedAt: "2026-08-20T01:00:00.000Z",
+  },
   geometry: { type: "Point", coordinates: [151, -33] },
   coordinates: [151, -33],
 }];

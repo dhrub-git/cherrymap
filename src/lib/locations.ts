@@ -101,15 +101,12 @@ function parseProvenance(value: unknown): LocationProvenance | null {
   const licence = stringValue(value.licence);
   const reuseBasis = stringValue(value.reuseBasis);
   if (!provider || !sourceUrl || !sourceRecordId || !importedAt || !reviewedAt || (!licence && !reuseBasis)) return null;
+  const basis: LocationProvenance = licence
+    ? { provider, sourceUrl, sourceRecordId, importedAt, reviewedAt, licence, ...(reuseBasis ? { reuseBasis } : {}) }
+    : { provider, sourceUrl, sourceRecordId, importedAt, reviewedAt, reuseBasis: reuseBasis as string };
   return {
-    provider,
-    sourceUrl,
+    ...basis,
     dataset: stringValue(value.dataset),
-    sourceRecordId,
-    licence,
-    reuseBasis,
-    importedAt,
-    reviewedAt,
   };
 }
 
