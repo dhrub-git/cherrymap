@@ -21,9 +21,9 @@ function isCalendarDate(value) {
 }
 
 function geometryPositions(geometry) {
-  if (geometry?.type === "Point") return [geometry.coordinates];
-  if (geometry?.type === "LineString") return geometry.coordinates;
-  if (geometry?.type === "Polygon") return geometry.coordinates?.flat();
+  if (geometry?.type === "Point" && Array.isArray(geometry.coordinates)) return [geometry.coordinates];
+  if (geometry?.type === "LineString" && Array.isArray(geometry.coordinates)) return geometry.coordinates;
+  if (geometry?.type === "Polygon" && Array.isArray(geometry.coordinates)) return geometry.coordinates.flat();
   return [];
 }
 

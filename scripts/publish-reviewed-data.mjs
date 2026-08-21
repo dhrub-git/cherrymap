@@ -1,4 +1,4 @@
-import { cp, mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { representativeCoordinates } from "../src/lib/public-geometry.mjs";
 
 const columns = [
@@ -33,14 +33,14 @@ export function toCsvRow(feature) {
 }
 
 export function csvForCollection(collection) {
-  const rows = Array.isArray(collection.features) ? collection.features.map(toCsvRow) : [];
+  const rows = Array.isArray(collection?.features) ? collection.features.map(toCsvRow) : [];
   return `${columns.join(",")}\n${rows.join("\n")}${rows.length ? "\n" : ""}`;
 }
 
 export async function publishReviewedData() {
   await mkdir("public/data", { recursive: true });
-  await cp("data/locations.geojson", "public/data/locations.geojson");
   const collection = JSON.parse(await readFile("data/locations.geojson", "utf8"));
+  await writeFile("public/data/locations.geojson", `${JSON.stringify(collection, null, 2)}\n`);
   await writeFile("public/data/locations.csv", csvForCollection(collection));
 }
 
