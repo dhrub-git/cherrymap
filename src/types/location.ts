@@ -1,12 +1,13 @@
 import type { BlossomGroup } from "@/lib/blossom-groups";
 import type { LocationType } from "@/lib/location-types";
+import type { ACCESS_STATUS_VALUES, CONFIDENCE_VALUES } from "@/lib/reviewed-location-contract.mjs";
 import type { Geometry } from "geojson";
 
 export type { BlossomGroup } from "@/lib/blossom-groups";
 
 export type { LocationType } from "@/lib/location-types";
-export type AccessStatus = "Public access" | "Ticketed venue";
-export type LocationConfidence = "Official" | "Verified" | "Probable" | "Unknown";
+export type AccessStatus = (typeof ACCESS_STATUS_VALUES)[number];
+export type LocationConfidence = (typeof CONFIDENCE_VALUES)[number];
 
 type ProvenanceBasis =
   | { licence: string; reuseBasis?: string }

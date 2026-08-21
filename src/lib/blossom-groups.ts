@@ -1,11 +1,15 @@
-export const blossomGroups = [
-  { label: "Flowering cherry", color: "#d95680" },
-  { label: "Flowering plum", color: "#db914f" },
-  { label: "Flowering peach", color: "#e9a56e" },
-  { label: "Mixed ornamental Prunus", color: "#6d568b" },
-  { label: "Unknown flowering Prunus", color: "#71816d" },
-] as const;
+import { BLOSSOM_GROUP_LABELS } from "@/lib/reviewed-location-contract.mjs";
 
-export type BlossomGroup = (typeof blossomGroups)[number]["label"];
+export type BlossomGroup = (typeof BLOSSOM_GROUP_LABELS)[number];
 
-export const blossomColor = Object.fromEntries(blossomGroups.map((group) => [group.label, group.color])) as Record<BlossomGroup, string>;
+const blossomColors: Record<BlossomGroup, string> = {
+  "Flowering cherry": "#d95680",
+  "Flowering plum": "#db914f",
+  "Flowering peach": "#e9a56e",
+  "Mixed ornamental Prunus": "#6d568b",
+  "Unknown flowering Prunus": "#71816d",
+};
+
+export const blossomGroups = BLOSSOM_GROUP_LABELS.map((label) => ({ label, color: blossomColors[label] }));
+
+export const blossomColor = blossomColors;

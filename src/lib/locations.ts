@@ -1,5 +1,13 @@
-import { blossomColor } from "@/lib/blossom-groups";
 import { locationTypeValues } from "@/lib/location-types";
+import { representativeCoordinates } from "@/lib/public-geometry.mjs";
+import {
+  ACCESS_STATUS_VALUES,
+  BLOSSOM_GROUP_LABELS,
+  CONFIDENCE_VALUES,
+  isHttpsUrl,
+  isIsoTimestamp,
+  nonEmptyString,
+} from "@/lib/reviewed-location-contract.mjs";
 import type { Geometry } from "geojson";
 import type {
   AccessStatus,
@@ -10,9 +18,9 @@ import type {
   LocationType,
 } from "@/types/location";
 
-const knownGroups = new Set(Object.keys(blossomColor));
-const accessStatuses = new Set<AccessStatus>(["Public access", "Ticketed venue"]);
-const confidenceValues = new Set<LocationConfidence>(["Official", "Verified", "Probable", "Unknown"]);
+const knownGroups = new Set<string>(BLOSSOM_GROUP_LABELS);
+const accessStatuses = new Set<AccessStatus>(ACCESS_STATUS_VALUES as readonly AccessStatus[]);
+const confidenceValues = new Set<LocationConfidence>(CONFIDENCE_VALUES as readonly LocationConfidence[]);
 
 export async function loadLocations(): Promise<Location[]> {
   const response = await fetch("/data/locations.geojson");
@@ -75,20 +83,17 @@ function isRecord(value: unknown): value is Record<string, unknown> {
 }
 
 function stringValue(value: unknown) {
-  return typeof value === "string" && value.trim() ? value : undefined;
+  return nonEmptyString(value) ? value : undefined;
 }
 
 function httpsUrl(value: unknown) {
   const text = stringValue(value);
-  if (!text) return undefined;
-  try { return new URL(text).protocol === "https:" ? text : undefined; } catch { return undefined; }
+  return text && isHttpsUrl(text) ? text : undefined;
 }
 
 function isoTimestamp(value: unknown) {
   const text = stringValue(value);
-  if (!text) return undefined;
-  const date = new Date(text);
-  return Number.isFinite(date.getTime()) && date.toISOString() === text ? text : undefined;
+  return text && isIsoTimestamp(text) ? text : undefined;
 }
 
 function parseProvenance(value: unknown): LocationProvenance | null {
@@ -110,36 +115,7 @@ function parseProvenance(value: unknown): LocationProvenance | null {
   };
 }
 
-function coordinatePair(value: unknown): [number, number] | null {
-  if (!Array.isArray(value) || value.length < 2) return null;
-  const [longitude, latitude] = value;
-  return typeof longitude === "number" && Number.isFinite(longitude) && typeof latitude === "number" && Number.isFinite(latitude)
-    ? [longitude, latitude]
-    : null;
-}
-
-function positionsEqual(first: [number, number], last: [number, number]) {
-  return first[0] === last[0] && first[1] === last[1];
-}
-
-export function representativeCoordinates(geometry: Record<string, unknown>): [number, number] | null {
-  if (geometry.type === "Point") return coordinatePair(geometry.coordinates);
-  if (geometry.type === "LineString" && Array.isArray(geometry.coordinates)) {
-    if (geometry.coordinates.length < 2) return null;
-    const line = geometry.coordinates.map(coordinatePair);
-    if (line.some((pair) => !pair)) return null;
-    return line[Math.floor(line.length / 2)];
-  }
-  if (geometry.type === "Polygon" && Array.isArray(geometry.coordinates) && geometry.coordinates.length > 0) {
-    const rings = geometry.coordinates.map((coordinates) => Array.isArray(coordinates) ? coordinates.map(coordinatePair) : []);
-    const valid = rings.every((ring) => ring.length >= 4 && ring.every(Boolean)
-      && positionsEqual(ring[0] as [number, number], ring.at(-1) as [number, number]));
-    if (!valid) return null;
-    const outerRing = (rings[0] as [number, number][]).slice(0, -1);
-    return outerRing.reduce<[number, number]>((sum, pair) => [sum[0] + pair[0] / outerRing.length, sum[1] + pair[1] / outerRing.length], [0, 0]);
-  }
-  return null;
-}
+export { representativeCoordinates } from "@/lib/public-geometry.mjs";
 
 export function filterLocations(locations: Location[], filters: LocationFilters) {
   const normalized = filters.query.trim().toLowerCase();
