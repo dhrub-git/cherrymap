@@ -26,7 +26,7 @@ function App() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [filtersOpen, setFiltersOpen] = useState(false);
-  const filterSummary = useRef<HTMLElement>(null);
+  const filterButton = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     loadLocations().then(setLocations).catch((reason: unknown) => setError(reason instanceof Error ? reason.message : "The reviewed map data could not be loaded.")).finally(() => setLoading(false));
@@ -58,7 +58,7 @@ function App() {
   };
   const showResults = () => {
     setFiltersOpen(false);
-    window.requestAnimationFrame(() => filterSummary.current?.focus());
+    window.requestAnimationFrame(() => filterButton.current?.focus());
   };
 
   return <main className="relative h-svh overflow-hidden bg-harbour text-ink">
@@ -85,17 +85,17 @@ function App() {
 
       <div className="no-scrollbar mt-2 flex gap-2 overflow-x-auto pb-1">{groups.map((item) => <button key={item} onClick={() => update({ group: item, selectedId: null })} className={`shrink-0 rounded-full border px-3 py-2 text-xs font-bold shadow-sm transition ${state.group === item ? "border-ink bg-ink text-white" : "border-white/80 bg-white/95 text-ink hover:bg-peach"}`}>{item}</button>)}</div>
 
-      <details open={filtersOpen} className="group mt-1 rounded-2xl border border-white/70 bg-paper/94 shadow-sm backdrop-blur" onToggle={(event) => toggleFilters(event.currentTarget.open)}>
-        <summary ref={filterSummary} className="flex min-h-10 cursor-pointer list-none items-center justify-between px-3 text-xs font-bold"><span className="inline-flex items-center gap-2"><SlidersHorizontal className="size-4" />Filters {activeFilterCount > 0 && <span className="grid size-5 place-items-center rounded-full bg-berry text-[10px] text-white">{activeFilterCount}</span>}</span><span className="text-slate-500 group-open:hidden">Type, access, year</span></summary>
-        <div className="grid grid-cols-2 gap-2 border-t border-stone-200 p-3">
+      <div className="mt-1 rounded-2xl border border-white/70 bg-paper/94 shadow-sm backdrop-blur">
+        <button ref={filterButton} type="button" aria-expanded={filtersOpen} aria-controls="filters-panel" onClick={() => toggleFilters(!filtersOpen)} className="flex min-h-10 w-full items-center justify-between rounded-2xl px-3 text-xs font-bold"><span className="inline-flex items-center gap-2"><SlidersHorizontal className="size-4" />Filters {activeFilterCount > 0 && <span className="grid size-5 place-items-center rounded-full bg-berry text-[10px] text-white">{activeFilterCount}</span>}</span>{!filtersOpen && <span className="text-slate-500">Type, access, year</span>}</button>
+        {filtersOpen && <div id="filters-panel" className="grid grid-cols-2 gap-2 border-t border-stone-200 p-3">
           <FilterSelect label="Location type" value={state.locationType} options={locationTypeOptions} onChange={(locationType) => update({ locationType: locationType as LocationFilters["locationType"], selectedId: null })} />
           <FilterSelect label="Access" value={state.access} options={accessOptions} onChange={(access) => update({ access: access as LocationFilters["access"], selectedId: null })} />
           <FilterSelect label="Last checked" value={state.year} options={["All years", ...years]} onChange={(year) => update({ year, selectedId: null })} />
           <FilterSelect label="Photos" value={state.photo} options={["All photos", "Has photo"]} onChange={(photo) => update({ photo: photo as LocationFilters["photo"], selectedId: null })} />
           {activeFilterCount > 0 && <Button variant="outline" size="sm" className="col-span-2 rounded-xl" onClick={() => update({ group: "All blossoms", locationType: "All types", access: "All access", photo: "All photos", year: "All years", selectedId: null })}>Clear filters</Button>}
           <Button size="sm" className="col-span-2 rounded-xl" onClick={showResults}>Show {visible.length} {visible.length === 1 ? "result" : "results"}</Button>
-        </div>
-      </details>
+        </div>}
+      </div>
     </section>
 
     {!filtersOpen && <>
