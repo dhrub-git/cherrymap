@@ -1,4 +1,5 @@
 import { Compass, ExternalLink, Flag, ShieldCheck, X } from "lucide-react";
+import { useEffect, useLayoutEffect, useRef } from "react";
 import { correctionUrl } from "@/lib/links";
 import { formatReviewedDate } from "@/lib/locations";
 import type { Location } from "@/types/location";
@@ -13,8 +14,33 @@ const confidenceCopy = {
 } as const;
 
 export function LocationDetails({ location, onClose }: Props) {
-  return <aside aria-labelledby="location-title" className="detail-sheet absolute inset-x-3 bottom-[4.75rem] z-30 mx-auto max-h-[68svh] overflow-auto rounded-[1.75rem] bg-ink p-5 text-white shadow-[0_24px_80px_rgba(12,38,28,.42)] md:inset-x-auto md:bottom-6 md:right-6 md:w-[410px] md:max-h-[calc(100svh-3rem)]">
-    <button onClick={onClose} className="absolute right-4 top-4 grid size-9 place-items-center rounded-full bg-white/10 hover:bg-white/20" aria-label="Close location details"><X className="size-5" /></button>
+  const sheet = useRef<HTMLElement>(null);
+  const closeButton = useRef<HTMLButtonElement>(null);
+  const onCloseRef = useRef(onClose);
+  const returnFocus = useRef<HTMLElement | null>(null);
+
+  useEffect(() => { onCloseRef.current = onClose; }, [onClose]);
+
+  useLayoutEffect(() => {
+    const active = document.activeElement;
+    if (active instanceof HTMLElement && active !== document.body && !sheet.current?.contains(active)) returnFocus.current = active;
+    closeButton.current?.focus({ preventScroll: true });
+  }, [location.id]);
+
+  useEffect(() => {
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape" && !document.querySelector("dialog[open]")) onCloseRef.current();
+    };
+
+    document.addEventListener("keydown", closeOnEscape);
+    return () => {
+      document.removeEventListener("keydown", closeOnEscape);
+      if (returnFocus.current?.isConnected) returnFocus.current.focus();
+    };
+  }, []);
+
+  return <aside ref={sheet} role="dialog" aria-labelledby="location-title" className="detail-sheet absolute inset-x-3 bottom-[4.75rem] z-30 mx-auto max-h-[68svh] overflow-auto rounded-[1.75rem] bg-ink p-5 text-white shadow-[0_24px_80px_rgba(12,38,28,.42)] md:inset-x-auto md:bottom-6 md:right-6 md:w-[410px] md:max-h-[calc(100svh-3rem)]">
+    <button ref={closeButton} onClick={onClose} className="absolute right-4 top-4 grid size-9 place-items-center rounded-full bg-white/10 hover:bg-white/20" aria-label="Close location details"><X className="size-5" /></button>
     <p className="pr-12 text-xs font-bold uppercase tracking-[.17em] text-pollen">{location.group}</p>
     <h2 id="location-title" className="mt-2 pr-10 font-display text-3xl leading-[.98]">{location.name}</h2>
     <p className="mt-3 text-sm text-white/72">{location.suburb}{location.councilArea !== location.suburb && <> · {location.councilArea}</>}</p>
