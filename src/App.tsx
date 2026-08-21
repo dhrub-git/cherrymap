@@ -48,7 +48,14 @@ function App() {
   const years = useMemo(() => [...new Set(locations.map((location) => location.lastChecked.slice(0, 4)))].sort().reverse(), [locations]);
   const activeFilterCount = [state.group !== "All blossoms", state.locationType !== "All types", state.access !== "All access", state.photo !== "All photos", state.year !== "All years"].filter(Boolean).length;
   const update = (changes: Partial<ExplorerState>) => setState((current) => ({ ...current, ...changes }));
-  const selectLocation = (id: string) => update({ selectedId: id });
+  const selectLocation = (id: string) => {
+    setFiltersOpen(false);
+    update({ selectedId: id });
+  };
+  const toggleFilters = (open: boolean) => {
+    setFiltersOpen(open);
+    if (open) update({ selectedId: null });
+  };
   const showResults = () => {
     setFiltersOpen(false);
     window.requestAnimationFrame(() => filterSummary.current?.focus());
@@ -78,7 +85,7 @@ function App() {
 
       <div className="no-scrollbar mt-2 flex gap-2 overflow-x-auto pb-1">{groups.map((item) => <button key={item} onClick={() => update({ group: item, selectedId: null })} className={`shrink-0 rounded-full border px-3 py-2 text-xs font-bold shadow-sm transition ${state.group === item ? "border-ink bg-ink text-white" : "border-white/80 bg-white/95 text-ink hover:bg-peach"}`}>{item}</button>)}</div>
 
-      <details open={filtersOpen} className="group mt-1 rounded-2xl border border-white/70 bg-paper/94 shadow-sm backdrop-blur" onToggle={(event) => setFiltersOpen(event.currentTarget.open)}>
+      <details open={filtersOpen} className="group mt-1 rounded-2xl border border-white/70 bg-paper/94 shadow-sm backdrop-blur" onToggle={(event) => toggleFilters(event.currentTarget.open)}>
         <summary ref={filterSummary} className="flex min-h-10 cursor-pointer list-none items-center justify-between px-3 text-xs font-bold"><span className="inline-flex items-center gap-2"><SlidersHorizontal className="size-4" />Filters {activeFilterCount > 0 && <span className="grid size-5 place-items-center rounded-full bg-berry text-[10px] text-white">{activeFilterCount}</span>}</span><span className="text-slate-500 group-open:hidden">Type, access, year</span></summary>
         <div className="grid grid-cols-2 gap-2 border-t border-stone-200 p-3">
           <FilterSelect label="Location type" value={state.locationType} options={locationTypeOptions} onChange={(locationType) => update({ locationType: locationType as LocationFilters["locationType"], selectedId: null })} />
@@ -91,17 +98,19 @@ function App() {
       </details>
     </section>
 
-    {!filtersOpen && <aside className="absolute bottom-6 left-6 top-[15.7rem] z-10 hidden w-[390px] flex-col overflow-hidden rounded-[1.75rem] border border-white/80 bg-paper/94 shadow-[0_20px_65px_rgba(23,59,45,.22)] backdrop-blur md:flex">
-      <div className="flex items-end justify-between border-b border-stone-200 px-4 py-3"><div><p className="text-[10px] font-bold uppercase tracking-[.16em] text-berry">Reviewed public locations</p><p className="font-display text-xl font-bold"><span aria-live="polite">{visible.length}</span> places</p></div><span className="rounded-full bg-eucalypt/10 px-2 py-1 text-[11px] font-bold text-eucalypt">Curated beta</span></div>
-      <ResultsContent loading={loading} error={error} locations={visible} selectedId={state.selectedId} onSelect={selectLocation} className="flex-1 overflow-auto p-2" />
-    </aside>}
+    {!filtersOpen && <>
+      <aside className="absolute bottom-6 left-6 top-[15.7rem] z-10 hidden w-[390px] flex-col overflow-hidden rounded-[1.75rem] border border-white/80 bg-paper/94 shadow-[0_20px_65px_rgba(23,59,45,.22)] backdrop-blur md:flex">
+        <div className="flex items-end justify-between border-b border-stone-200 px-4 py-3"><div><p className="text-[10px] font-bold uppercase tracking-[.16em] text-berry">Reviewed public locations</p><p className="font-display text-xl font-bold"><span aria-live="polite">{visible.length}</span> places</p></div><span className="rounded-full bg-eucalypt/10 px-2 py-1 text-[11px] font-bold text-eucalypt">Curated beta</span></div>
+        <ResultsContent loading={loading} error={error} locations={visible} selectedId={state.selectedId} onSelect={selectLocation} className="flex-1 overflow-auto p-2" />
+      </aside>
 
-    {state.view === "list" && !filtersOpen && <section className="absolute inset-x-3 bottom-[4.75rem] top-[15.7rem] z-10 overflow-hidden rounded-[1.75rem] border border-white/80 bg-paper/97 shadow-xl backdrop-blur md:hidden">
-      <div className="flex items-center justify-between border-b border-stone-200 px-4 py-3"><p className="font-display text-xl font-bold"><span aria-live="polite">{visible.length}</span> reviewed places</p><span className="text-xs font-bold text-eucalypt">List view</span></div>
-      <ResultsContent loading={loading} error={error} locations={visible} selectedId={state.selectedId} onSelect={selectLocation} className="h-full overflow-auto p-2 pb-20" />
-    </section>}
+      {state.view === "list" && <section className="absolute inset-x-3 bottom-[4.75rem] top-[15.7rem] z-10 overflow-hidden rounded-[1.75rem] border border-white/80 bg-paper/97 shadow-xl backdrop-blur md:hidden">
+        <div className="flex items-center justify-between border-b border-stone-200 px-4 py-3"><p className="font-display text-xl font-bold"><span aria-live="polite">{visible.length}</span> reviewed places</p><span className="text-xs font-bold text-eucalypt">List view</span></div>
+        <ResultsContent loading={loading} error={error} locations={visible} selectedId={state.selectedId} onSelect={selectLocation} className="h-full overflow-auto p-2 pb-20" />
+      </section>}
 
-    {state.view === "map" && !filtersOpen && (loading || error || visible.length === 0) && <div className="absolute inset-x-3 bottom-[4.75rem] z-20 md:hidden">{loading ? <LoadingResults /> : error ? <p className="rounded-xl bg-red-50 p-3 text-sm text-red-700" role="alert">{error}</p> : <EmptyResults />}</div>}
+      {state.view === "map" && (loading || error || visible.length === 0) && <div className="absolute inset-x-3 bottom-[4.75rem] z-20 md:hidden">{loading ? <LoadingResults /> : error ? <p className="rounded-xl bg-red-50 p-3 text-sm text-red-700" role="alert">{error}</p> : <EmptyResults />}</div>}
+    </>}
 
     <div className="absolute bottom-3 left-1/2 z-20 flex -translate-x-1/2 rounded-full border border-white/80 bg-paper/96 p-1 shadow-[0_12px_36px_rgba(23,59,45,.24)] md:hidden" aria-label="View switcher">
       <button onClick={() => update({ view: "map" })} className={`view-switch ${state.view === "map" ? "active" : ""}`} aria-pressed={state.view === "map"}><MapIcon className="size-4" />Map</button>

@@ -26,7 +26,9 @@ const location = vi.hoisted(() => ({
   coordinates: [151, -33],
 } satisfies Location));
 
-vi.mock("@/components/BlossomMap", () => ({ BlossomMap: () => <div aria-label="Map" /> }));
+vi.mock("@/components/BlossomMap", () => ({
+  BlossomMap: ({ onSelect }: { onSelect: (id: string) => void }) => <button onClick={() => onSelect(location.id)}>Select map location</button>,
+}));
 vi.mock("@/lib/locations", async (importOriginal) => {
   const actual = await importOriginal<typeof import("@/lib/locations")>();
   return { ...actual, loadLocations: vi.fn().mockResolvedValue([location]) };
@@ -52,5 +54,31 @@ describe("App filters", () => {
     await waitFor(() => expect(screen.getAllByRole("button", { name: /Wistaria Gardens Flowering Peaches/ })).not.toHaveLength(0));
     await waitFor(() => expect(summary?.parentElement).not.toHaveAttribute("open"));
     await waitFor(() => expect(summary).toHaveFocus());
+  });
+
+  it("closes location details before opening filters", async () => {
+    render(<App />);
+    const [result] = await screen.findAllByRole("button", { name: /Wistaria Gardens Flowering Peaches/ });
+    fireEvent.click(result);
+    expect(await screen.findByRole("dialog", { name: location.name })).toBeInTheDocument();
+
+    const summary = screen.getByText("Filters", { exact: true }).closest("summary");
+    fireEvent.click(summary!);
+
+    await waitFor(() => expect(screen.queryByRole("dialog", { name: location.name })).not.toBeInTheDocument());
+    expect(screen.getByRole("button", { name: "Show 1 result" })).toBeInTheDocument();
+  });
+
+  it("closes filters before a map selection opens location details", async () => {
+    render(<App />);
+    await screen.findAllByRole("button", { name: /Wistaria Gardens Flowering Peaches/ });
+    const summary = screen.getByText("Filters", { exact: true }).closest("summary");
+    fireEvent.click(summary!);
+    await screen.findByRole("button", { name: "Show 1 result" });
+
+    fireEvent.click(screen.getByRole("button", { name: "Select map location" }));
+
+    expect(await screen.findByRole("dialog", { name: location.name })).toBeInTheDocument();
+    await waitFor(() => expect(summary?.parentElement).not.toHaveAttribute("open"));
   });
 });
