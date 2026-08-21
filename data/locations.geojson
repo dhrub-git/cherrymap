@@ -867,11 +867,10 @@
         "lastChecked": "2026-08-21",
         "source": "Winter Walk Highlights — Botanic Gardens of Sydney",
         "locationType": "venue",
-        "scientificName": "Prunus ‘Yvonne Mathies’",
         "commonName": "Millennium Cherry",
         "locationConfidence": "Official",
-        "taxonConfidence": "Cultivar and parent species confirmed by official source",
-        "evidenceSummary": "Botanic Gardens of Sydney identifies three Millennium Cherry trees, hybrids of Prunus avium and Prunus campanulata, along the path left of the pond from Botanic House and Farm Cove Eatery.",
+        "taxonConfidence": "Prunus hybrid confirmed; official sources conflict on the cultivar spelling",
+        "evidenceSummary": "Botanic Gardens of Sydney identifies three Millennium Cherry trees, hybrids of Prunus avium and Prunus campanulata, along the path left of the pond from Botanic House and Farm Cove Eatery. Official publications vary between ‘Yvonne Mathies’ and ‘Yvonne Matthies’, so the cultivar spelling is not presented as settled.",
         "visitorNotes": "This area-level pin marks the official approach landmark, not an individual tree. The Garden is free and open daily; seasonal flowering varies.",
         "visitorInfoUrl": "https://www.botanicgardens.org.au/royal-botanic-garden-sydney",
         "provenance": {
@@ -879,81 +878,6 @@
           "dataset": "Official Winter Walk Highlights page",
           "sourceRecordId": "royal-botanic-garden-millennium-cherries",
           "sourceUrl": "https://www.botanicgardens.org.au/index.php/discover-and-learn/watch-listen-read/winter-walk-highlights-royal-botanic-garden-sydney",
-          "reuseBasis": "Manually curated factual venue record; no source text, dataset or media reproduced",
-          "importedAt": "2026-08-21T00:02:30.000Z",
-          "reviewedAt": "2026-08-21T00:02:30.000Z"
-        }
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          150.4220263,
-          -33.5386503
-        ]
-      },
-      "properties": {
-        "id": "botanic-gardens-sydney:mount-tomah-residence-garden",
-        "name": "Mount Tomah Residence Garden Cherry Blossoms",
-        "suburb": "Mount Tomah",
-        "streetAddress": "Bells Line of Road, Mount Tomah",
-        "councilArea": "Blue Mountains City Council",
-        "group": "Flowering cherry",
-        "access": "Public access",
-        "lastChecked": "2026-08-21",
-        "source": "Ornamental Gardens — Botanic Gardens of Sydney",
-        "locationType": "venue",
-        "commonName": "Cherry blossoms",
-        "locationConfidence": "Official",
-        "taxonConfidence": "Cherry group confirmed; species not published",
-        "evidenceSummary": "Botanic Gardens of Sydney identifies spring cherry blossoms in the Residence Garden at the Blue Mountains Botanic Garden Mount Tomah. This record marks the garden venue, not individual trees.",
-        "visitorNotes": "The Garden is free and normally open daily. Check current hours and road conditions before travelling; flowering is seasonal.",
-        "visitorInfoUrl": "https://www.botanicgardens.org.au/blue-mountains-botanic-garden-mount-tomah/plan-your-visit",
-        "provenance": {
-          "provider": "Botanic Gardens of Sydney",
-          "dataset": "Official Ornamental Gardens page",
-          "sourceRecordId": "mount-tomah-residence-garden-cherry-blossoms",
-          "sourceUrl": "https://www.botanicgardens.org.au/blue-mountains-botanic-garden-mount-tomah/garden-highlights/ornamental-gardens",
-          "reuseBasis": "Manually curated factual venue record; no source text, dataset or media reproduced",
-          "importedAt": "2026-08-21T00:02:30.000Z",
-          "reviewedAt": "2026-08-21T00:02:30.000Z"
-        }
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          150.470595,
-          -33.521004
-        ]
-      },
-      "properties": {
-        "id": "wildwood-garden:weeping-cherry-walk",
-        "name": "Wildwood Garden Weeping Cherry Walk",
-        "suburb": "Bilpin",
-        "streetAddress": "29 Powells Road, Bilpin",
-        "councilArea": "Hawkesbury City Council",
-        "group": "Flowering cherry",
-        "access": "Ticketed venue",
-        "lastChecked": "2026-08-21",
-        "source": "Wildwood Garden history and 2026 opening details",
-        "locationType": "venue",
-        "scientificName": "Prunus subhirtella ‘Rosea’",
-        "commonName": "Pink weeping cherry",
-        "locationConfidence": "Official",
-        "taxonConfidence": "Cultivar confirmed by venue source",
-        "evidenceSummary": "Wildwood Garden's official history identifies a walk of nine pink weeping cherries, Prunus subhirtella ‘Rosea’. This record marks the ticketed garden venue, not individual trees.",
-        "visitorNotes": "The garden has seasonal opening dates and paid entry. Check the official 2026 opening page before travelling; peak timing varies with conditions.",
-        "visitorInfoUrl": "https://www.wildwoodgarden.com.au/opening-details/",
-        "provenance": {
-          "provider": "Wildwood Garden",
-          "dataset": "Official garden history and opening pages",
-          "sourceRecordId": "wildwood-weeping-cherry-walk",
-          "sourceUrl": "https://www.wildwoodgarden.com.au/history/",
           "reuseBasis": "Manually curated factual venue record; no source text, dataset or media reproduced",
           "importedAt": "2026-08-21T00:02:30.000Z",
           "reviewedAt": "2026-08-21T00:02:30.000Z"

@@ -121,7 +121,7 @@ Use exact language such as “Last checked 19 August 2026” and “Probably flo
 ## 9. Content and curation workflow
 
 1. A curator gathers official public inventories and permitted evidence.
-2. The curator verifies taxonomy, access, source licence, and public-safety suitability.
+2. The curator verifies taxonomy, access, public-safety suitability, and either the source licence/permission or a documented factual reuse basis when no protected source material is republished.
 3. The curator updates the checked-in GeoJSON data.
 4. A pull request or review records the change.
 5. The site is rebuilt and deployed.
