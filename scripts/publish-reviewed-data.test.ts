@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { representativeCoordinates as mapRepresentativeCoordinates } from "../src/lib/locations";
-import { escapeCsv, representativeCoordinates, toCsvRow } from "./publish-reviewed-data.mjs";
+import { csvForCollection, escapeCsv, representativeCoordinates, toCsvRow } from "./publish-reviewed-data.mjs";
 
 describe("escapeCsv", () => {
   it("prevents spreadsheet formula evaluation while retaining CSV escaping", () => {
@@ -35,6 +35,14 @@ describe("escapeCsv", () => {
   it("exports a public representative position for rows", () => {
     const row = toCsvRow({ geometry: { type: "LineString", coordinates: [[151.1, -33.9], [151.2, -33.8], [151.3, -33.7]] }, properties: { id: "row:1" } });
     expect(row).toContain('"151.2","-33.8"');
+  });
+
+  it("uses the geometric midpoint for two-position rows", () => {
+    expect(representativeCoordinates({ type: "LineString", coordinates: [[151.1, -33.9], [151.3, -33.7]] })).toEqual([151.2, -33.8]);
+  });
+
+  it("returns a header-only CSV for a malformed collection", () => {
+    expect(csvForCollection(null)).toMatch(/^id,name,suburb,/);
   });
 
   it("keeps map and CSV representative positions in parity", () => {

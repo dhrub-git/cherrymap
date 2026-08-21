@@ -7,6 +7,7 @@
     "prepare:data": "node scripts/publish-reviewed-data.mjs",
     "dev": "npm run prepare:data && vite",
     "build": "npm run prepare:data && tsc -b && vite build",
+    "check:v1-data": "npm run prepare:data && node scripts/check-v1-data-readiness.mjs",
     "import:city-sydney": "node scripts/import-city-sydney.mjs",
     "test": "vitest run",
     "test:watch": "vitest"
